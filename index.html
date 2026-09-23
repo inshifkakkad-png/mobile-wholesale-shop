@@ -24,6 +24,31 @@
 		body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Avenir Next", Avenir, sans-serif; }
 		button, input { font: inherit; }
 		button { cursor: pointer; }
+		.login-screen { min-height: 100vh; display: grid; place-items: center; padding: 24px; background: linear-gradient(135deg, #eef7f4, var(--paper)); }
+		.login-card { width: min(100%, 390px); background: var(--white); border: 1px solid var(--line); border-radius: 22px; padding: 32px; box-shadow: var(--shadow); }
+		.login-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
+		.login-heading { margin: 0 0 7px; font-size: 27px; letter-spacing: -1px; }
+		.login-copy { margin: 0 0 24px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+		.login-form { display: grid; gap: 14px; }
+		.login-field { display: grid; gap: 6px; }
+		.login-field label { color: var(--muted); font-size: 11px; font-weight: 800; }
+		.login-field input { width: 100%; border: 1px solid var(--line); border-radius: 10px; background: #fbfcfb; color: var(--ink); padding: 12px; outline: 0; font-size: 13px; }
+		.login-submit { border: 0; border-radius: 10px; background: var(--teal); color: white; padding: 12px; font-size: 13px; font-weight: 800; margin-top: 4px; }
+		.login-error { min-height: 15px; margin: 0; color: var(--orange); font-size: 11px; font-weight: 700; }
+		body:not(.authenticated) .app, body:not(.authenticated) .mobile-nav { display: none; }
+		body.authenticated .login-screen { display: none; }
+		.logout-button { border: 1px solid var(--line); border-radius: 10px; background: var(--white); color: var(--muted); padding: 10px 12px; font-size: 11px; font-weight: 800; }
+		.logout-button:hover { border-color: var(--orange); color: var(--orange); }
+		.account-card { display: grid; gap: 9px; padding: 14px; border: 1px solid var(--line); border-radius: 14px; background: #fbfcfb; }
+		.account-card small { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; }
+		.account-user { display: flex; align-items: center; gap: 9px; color: var(--ink); font-size: 12px; font-weight: 800; }
+		.account-avatar { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--teal-soft); color: var(--teal-dark); font-size: 10px; }
+		.account-card .logout-button { width: 100%; }
+		.top-actions .account-card { display: flex; align-items: center; gap: 11px; padding: 7px 8px 7px 12px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,.9); box-shadow: 0 5px 18px rgba(20, 57, 57, .06); }
+		.top-actions .account-card small { color: var(--muted); font-size: 9px; letter-spacing: .8px; line-height: 1; }
+		.top-actions .account-user { color: var(--ink); font-size: 12px; line-height: 1; }
+		.top-actions .account-card .logout-button { width: auto; border: 0; border-left: 1px solid var(--line); border-radius: 0; background: transparent; color: var(--teal-dark); padding: 5px 4px 5px 12px; font-size: 11px; }
+		.top-actions .account-card .logout-button:hover { color: var(--orange); }
 		.app { min-height: 100vh; max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 226px 1fr; }
 		.sidebar { background: var(--white); border-right: 1px solid var(--line); padding: 28px 18px; display: flex; flex-direction: column; gap: 32px; }
 		.brand { display: flex; align-items: center; gap: 10px; padding: 0 10px; }
@@ -131,6 +156,156 @@
 		.report-entry-top { display: flex; justify-content: space-between; gap: 12px; font-size: 11px; font-weight: 800; }
 		.report-entry small { color: var(--muted); font-size: 10px; }
 		.report-entry p { margin: 6px 0 0; color: var(--muted); font-size: 10px; line-height: 1.45; }
+		.inventory-reports { display: none; }
+		.inventory-reports.active { display: block; }
+		.report-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+		.report-filters { display: grid; grid-template-columns: repeat(5, 1fr) auto; gap: 10px; align-items: end; margin-bottom: 16px; padding: 13px; border: 1px solid var(--line); border-radius: 13px; background: #fbfcfb; }
+		.report-filters .bill-field { gap: 5px; }
+		.report-filters .bill-field input { padding: 9px 10px; }
+		.report-clear { height: 35px; white-space: nowrap; }
+		.inventory-report-card { border: 1px solid var(--line); border-radius: 14px; padding: 16px; background: #fbfcfb; }
+		.inventory-report-card header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 17px; }
+		.inventory-report-number { width: 30px; height: 30px; display: grid; place-items: center; flex-shrink: 0; border-radius: 9px; background: var(--teal-soft); color: var(--teal-dark); font-size: 12px; font-weight: 800; }
+		.inventory-report-card h3 { margin: 0 0 4px; font-size: 14px; letter-spacing: -.2px; }
+		.inventory-report-card p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.4; }
+		.inventory-report-card .report-metric { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--line); padding-top: 12px; color: var(--muted); font-size: 10px; }
+		.inventory-report-card .report-metric strong { color: var(--ink); font-size: 15px; }
+		.inventory-report-card:nth-child(2) .inventory-report-number { background: var(--orange-soft); color: var(--orange); }
+		.inventory-report-card:nth-child(3) .inventory-report-number { background: #fff7d8; color: #ad7c0b; }
+		.inventory-report-card:nth-child(4) .inventory-report-number { background: #eaf0f5; color: #527288; }
+		.sales-view { display: none; }
+		.sales-view.active { display: block; }
+		.sale-report-view { display: none; }
+		.sale-report-view.active { display: block; }
+		.sale-report-toolbar { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)) auto; gap: 9px; align-items: end; margin-bottom: 16px; padding: 13px; border: 1px solid var(--line); border-radius: 13px; background: #fbfcfb; }
+		.sale-report-toolbar .bill-field { gap: 5px; }
+		.sale-report-toolbar .bill-field input { padding: 9px 10px; }
+		.sale-report-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+		.sale-report-summary article { border: 1px solid var(--line); border-radius: 13px; padding: 14px; background: #fbfcfb; }
+		.sale-report-summary span { display: block; color: var(--muted); font-size: 10px; font-weight: 700; }
+		.sale-report-summary strong { display: block; margin-top: 7px; font-size: 18px; }
+		.sale-report-list { display: grid; gap: 10px; }
+		.sale-report-row { display: grid; grid-template-columns: minmax(135px, 1.2fr) minmax(130px, 1fr) auto auto auto; align-items: center; gap: 12px; padding: 13px 0; border-top: 1px solid var(--line); }
+		.sale-report-row strong { display: block; font-size: 12px; }
+		.sale-report-row span { color: var(--muted); font-size: 10px; }
+		.sale-report-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+		.sale-report-actions .action-button, .sale-report-actions .status-view { min-width: 56px; padding: 4px 6px; border-radius: 10px; font-size: 9px; text-align: center; }
+		.sale-report-actions .status-view { border: 1px solid var(--line); background: white; color: var(--teal); font-weight: 800; }
+		.sale-edit-form { display: none; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 16px; padding: 14px; border: 1px solid var(--teal); border-radius: 13px; background: var(--teal-soft); }
+		.sale-edit-form.open { display: grid; }
+		.sale-edit-form .sale-edit-wide { grid-column: 1 / -1; }
+		.sale-edit-actions { display: flex; justify-content: flex-end; gap: 8px; grid-column: 1 / -1; }
+		.print-header { display: none; }
+		.invoice-print-sheet { display: none; }
+		@media print {
+			body { background: white; }
+			.login-screen, .sidebar, .topbar, .summary-grid, .mobile-nav, .sale-report-view > :not(.invoice-print-sheet), .toast { display: none !important; }
+			.app { display: block; max-width: none; }
+			main { padding: 0; }
+			.sale-report-view { display: block !important; }
+			.invoice-print-sheet { display: block !important; padding: 20px; color: #111; }
+			.invoice-print-sheet header { text-align: center; border-bottom: 2px solid #111; padding-bottom: 14px; margin-bottom: 20px; }
+			.invoice-print-sheet h1 { margin: 0; font-size: 25px; }
+			.invoice-print-sheet header p { margin: 4px 0; font-size: 12px; }
+			.invoice-print-sheet h2 { margin: 0; font-size: 20px; }
+			.invoice-print-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px; font-size: 12px; }
+			.invoice-print-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+			.invoice-print-table th, .invoice-print-table td { padding: 10px 8px; border: 1px solid #bbb; text-align: left; font-size: 12px; }
+			.invoice-print-table th:last-child, .invoice-print-table td:last-child { text-align: right; }
+			.invoice-print-total { text-align: right; font-size: 15px; font-weight: 800; }
+		}
+		.tools-view { display: none; }
+		.tools-view.active { display: block; }
+		.financial-view { display: none; }
+		.financial-view.active { display: block; }
+		.financial-filters, .financial-summary, .expense-grid { display: grid; gap: 12px; }
+		.financial-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-bottom: 18px; }
+		.financial-summary { grid-template-columns: repeat(5, 1fr); margin-bottom: 18px; }
+		.financial-summary article { border: 1px solid var(--line); border-radius: 13px; padding: 14px; background: #fbfcfb; }
+		.financial-summary span { color: var(--muted); font-size: 10px; font-weight: 700; }
+		.financial-summary strong { display: block; margin-top: 7px; font-size: 18px; }
+		.financial-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+		.financial-table th, .financial-table td { text-align: left; padding: 10px 8px; border-top: 1px solid var(--line); font-size: 10px; }
+		.financial-table th { color: var(--muted); font-size: 9px; text-transform: uppercase; letter-spacing: .5px; }
+		.expense-grid { grid-template-columns: repeat(2, 1fr); }
+		.expense-card { border: 1px solid var(--line); border-radius: 14px; padding: 16px; background: #fbfcfb; }
+		.expense-card h3 { margin: 0 0 12px; font-size: 14px; }
+		.expense-form { display: grid; gap: 9px; }
+		.expense-list { display: grid; gap: 7px; margin-top: 13px; }
+		.expense-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; border-top: 1px solid var(--line); padding-top: 8px; font-size: 10px; }
+		.expense-row span { color: var(--muted); }
+		.expense-row-info { min-width: 0; flex: 1; }
+		.expense-row-info strong, .expense-row-info span { display: block; }
+		.expense-row-info span { margin-top: 3px; }
+		.expense-row > strong { white-space: nowrap; }
+		.expense-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+		.expense-actions .action-button, .expense-actions .status-view { min-width: 56px; padding: 4px 6px; border-radius: 10px; font-size: 9px; text-align: center; }
+		.expense-actions .status-view { border: 1px solid var(--line); background: white; color: var(--teal); font-weight: 800; }
+		.model-tools-layout { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(260px, .6fr); gap: 18px; }
+		.model-list { display: grid; gap: 9px; }
+		.model-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; background: #fbfcfb; }
+		.model-row strong { display: block; font-size: 12px; }
+		.model-row span { color: var(--muted); font-size: 10px; }
+		.model-count { color: var(--teal-dark); background: var(--teal-soft); border-radius: 20px; padding: 5px 9px; font-size: 10px; font-weight: 800; white-space: nowrap; }
+		.tools-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+		.tools-actions .action-button, .tools-actions .status-view { min-width: 56px; padding: 4px 6px; border-radius: 10px; font-size: 9px; text-align: center; }
+		.tools-actions .status-view { border: 1px solid var(--line); background: white; color: var(--teal); font-weight: 800; }
+		.customer-tools-list { display: grid; gap: 8px; margin-top: 16px; }
+		.customer-tools-row { display: flex; justify-content: space-between; gap: 12px; align-items: center; border: 1px solid var(--line); border-radius: 11px; padding: 11px 12px; background: #fbfcfb; }
+		.customer-tools-row strong { display: block; font-size: 11px; }
+		.customer-tools-row span { color: var(--muted); font-size: 10px; }
+		.add-model-card { border: 1px solid var(--line); border-radius: 14px; padding: 16px; background: #fbfcfb; }
+		.add-model-card h3 { margin: 0 0 5px; font-size: 14px; }
+		.add-model-card p { margin: 0 0 16px; color: var(--muted); font-size: 10px; line-height: 1.4; }
+		.add-model-form { display: grid; gap: 10px; }
+		.add-model-form input, .add-model-form select { width: 100%; border: 1px solid var(--line); border-radius: 9px; background: white; color: var(--ink); padding: 10px; font-size: 11px; outline: 0; }
+		@media (max-width: 850px) { .model-tools-layout { grid-template-columns: 1fr; } }
+		.sales-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 18px; }
+		.sales-summary article { border: 1px solid var(--line); border-radius: 13px; padding: 14px; background: #fbfcfb; }
+		.sales-summary span { display: block; color: var(--muted); font-size: 10px; font-weight: 700; }
+		.sales-summary strong { display: block; margin-top: 7px; font-size: 18px; }
+		.invoice-list { display: grid; gap: 10px; }
+		.invoice-row { display: grid; grid-template-columns: minmax(135px, 1.3fr) 1fr auto auto; align-items: center; gap: 14px; padding: 13px 0; border-top: 1px solid var(--line); }
+		.invoice-customer strong, .invoice-total strong { display: block; font-size: 12px; }
+		.invoice-customer span, .invoice-meta span { color: var(--muted); font-size: 10px; }
+		.invoice-meta { display: grid; gap: 3px; }
+		.invoice-status { border-radius: 20px; padding: 5px 8px; background: var(--teal-soft); color: var(--teal-dark); font-size: 9px; font-weight: 800; }
+		.invoice-status.credit { background: var(--orange-soft); color: var(--orange); }
+		.invoice-total { text-align: right; }
+		.invoice-action { border: 1px solid var(--line); border-radius: 8px; background: white; color: var(--teal); padding: 7px 9px; font-size: 10px; font-weight: 800; }
+		.transfer-list { display: grid; gap: 8px; margin-top: 14px; }
+		.transfer-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 9px; align-items: center; border-top: 1px solid var(--line); padding-top: 10px; }
+		.transfer-row strong { display: block; font-size: 11px; }
+		.transfer-row span { color: var(--muted); font-size: 9px; line-height: 1.4; }
+		.transfer-row .invoice-status { justify-self: end; }
+		.transfer-actions { justify-self: end; }
+		.stock-actions { display: flex; flex-wrap: wrap; gap: 4px; justify-content: flex-end; }
+		.stock-actions .action-button { min-width: 56px; padding: 4px 6px; border-radius: 10px; font-size: 9px; }
+		.stock-actions .restock-btn, .stock-actions .status-view { border: 1px solid var(--line); border-radius: 10px; background: white; color: var(--teal); padding: 4px 6px; font-size: 9px; font-weight: 800; }
+		.stock-group-row td { padding: 14px 0 7px; border-top: 0; }
+		.stock-group-row strong { color: var(--teal-dark); font-size: 11px; }
+		.stock-group-row span { color: var(--muted); font-size: 10px; margin-left: 7px; }
+		.purchase-list { display: none; gap: 8px; margin-top: 14px; }
+		.purchase-list.open { display: grid; }
+		.purchase-list-title { color: var(--muted); font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .6px; }
+		@media (max-width: 850px) {
+			.report-filters { grid-template-columns: 1fr 1fr; }
+			.report-clear { width: 100%; }
+			.financial-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+			.sale-report-toolbar { grid-template-columns: 1fr 1fr; }
+			.sale-report-toolbar .report-clear { grid-column: 1 / -1; }
+			.sale-report-row { grid-template-columns: 1fr auto; gap: 8px; }
+			.sale-report-row > strong, .sale-report-row > .invoice-status { justify-self: end; }
+			.sale-report-actions { grid-column: 1 / -1; flex-direction: row; justify-content: flex-end; }
+			.sales-summary { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+			.sales-summary article { padding: 11px 9px; }
+			.sales-summary strong { font-size: 14px; }
+			.invoice-row { grid-template-columns: 1fr auto; gap: 7px 10px; }
+			.invoice-meta { grid-column: 1; }
+			.invoice-status { grid-column: 2; grid-row: 1; justify-self: end; }
+			.invoice-total { grid-column: 1; text-align: left; }
+			.invoice-action { grid-column: 2; grid-row: 2; justify-self: end; }
+		}
 		.inventory-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 16px; }
 		.inventory-filter { display: flex; gap: 7px; overflow-x: auto; }
 		.inventory-filter button { white-space: nowrap; border: 1px solid var(--line); background: white; color: var(--muted); border-radius: 20px; padding: 8px 11px; font-size: 11px; font-weight: 700; }
@@ -171,7 +346,14 @@
 		.bill-phone-entry + .bill-phone-entry { padding-top: 13px; }
 		.bill-entry-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 		.bill-entry-label { color: var(--ink); font-size: 11px; font-weight: 800; }
-		.delete-phone { border: 0; background: var(--orange-soft); color: var(--orange); border-radius: 8px; padding: 5px 8px; font-size: 10px; font-weight: 800; }
+		.entry-actions { display: flex; flex-direction: column; gap: 6px; min-width: 78px; }
+		.purchase-actions { justify-self: end; min-width: 56px; gap: 4px; }
+		.purchase-actions .action-button { min-width: 56px; padding: 4px 6px; border-radius: 10px; font-size: 9px; }
+		.action-button { border: 0; border-radius: 8px; padding: 5px 8px; font-size: 10px; font-weight: 800; text-align: center; }
+		.action-button.edit { background: var(--teal-soft); color: var(--teal-dark); }
+		.delete-phone, .action-button.delete { border: 1px solid rgba(193, 91, 60, .18); background: linear-gradient(180deg, #fff4f1 0%, #ffe7e1 100%); color: #c6563d; border-radius: 10px; padding: 7px 10px; font-size: 10px; font-weight: 800; letter-spacing: .15px; min-width: 72px; line-height: 1.1; box-shadow: 0 6px 12px rgba(197, 86, 61, .08); transition: transform .15s ease, box-shadow .15s ease, background .15s ease; }
+		.delete-phone:hover, .action-button.delete:hover { background: linear-gradient(180deg, #fff0ed 0%, #ffdcd4 100%); box-shadow: 0 8px 14px rgba(197, 86, 61, .12); transform: translateY(-1px); }
+		.delete-phone:active, .action-button.delete:active { transform: translateY(0); box-shadow: 0 4px 8px rgba(197, 86, 61, .08); }
 		.bill-product-count { color: var(--muted); font-size: 11px; font-weight: 700; }
 		.bill-field input:focus, .bill-field select:focus { border-color: var(--teal); box-shadow: 0 0 0 3px var(--teal-soft); }
 		.scan-row { display: flex; gap: 8px; }
@@ -203,12 +385,25 @@
 		.imei-status.invalid { color: var(--orange); }
 		.toast { position: fixed; bottom: 24px; left: 50%; transform: translate(-50%, 90px); background: var(--ink); color: white; border-radius: 9px; padding: 12px 17px; font-size: 12px; box-shadow: var(--shadow); transition: transform .25s; z-index: 4; }
 		.toast.show { transform: translate(-50%, 0); }
+		.pin-backdrop { position: fixed; inset: 0; display: none; place-items: center; padding: 20px; background: rgba(23, 37, 43, .35); z-index: 8; }
+		.pin-backdrop.open { display: grid; }
+		.pin-card { width: min(100%, 310px); background: var(--white); border-radius: 16px; padding: 20px; box-shadow: 0 24px 70px rgba(23, 37, 43, .2); }
+		.pin-card h2 { margin: 0 0 5px; font-size: 18px; }
+		.pin-card p { margin: 0 0 14px; color: var(--muted); font-size: 11px; }
+		.pin-card input { width: 100%; border: 1px solid var(--line); border-radius: 10px; padding: 11px; font-size: 14px; outline: 0; }
+		.pin-actions { display: flex; gap: 8px; margin-top: 13px; }
+		.pin-actions button { flex: 1; border-radius: 10px; padding: 10px; font-size: 11px; font-weight: 800; }
+		.pin-cancel { border: 1px solid var(--line); background: white; color: var(--muted); }
+		.pin-submit { border: 0; background: var(--teal); color: white; }
 		.mobile-nav { display: none; }
 		@media (max-width: 850px) {
 			.app { display: block; }
 			.sidebar { display: none; }
 			main { padding: 21px 16px 92px; }
 			.topbar { margin-bottom: 22px; }
+			.top-actions .account-card { gap: 7px; padding-left: 9px; }
+			.top-actions .account-card small { display: none; }
+			.top-actions .account-card .logout-button { padding-left: 8px; }
 			.summary-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 19px; }
 			.summary { min-height: 104px; padding: 14px; }
 			.summary h2 { font-size: 20px; margin-top: 11px; }
@@ -234,25 +429,43 @@
 			.inventory-filter { margin-top: 11px; }
 		}
 		@media (min-width: 851px) and (max-width: 1050px) { .products { grid-template-columns: repeat(2, 1fr); } }
+		.cash-transfer-form { display: grid; gap: 9px; margin-top: 12px; }
+		.cash-transfer-form .quick-action { margin-top: 2px; }
 	</style>
 </head>
 <body>
+	<section class="login-screen" aria-labelledby="loginTitle">
+		<div class="login-card">
+			<div class="login-brand"><div class="brand-mark">S</div><div><strong>stockly</strong><span>wholesale</span></div></div>
+			<h1 class="login-heading" id="loginTitle">Welcome back</h1>
+			<p class="login-copy">Sign in to manage your wholesale inventory and sales.</p>
+			<form class="login-form" id="loginForm">
+				<div class="login-field"><label for="loginUserId">User ID</label><input id="loginUserId" autocomplete="username" required /></div>
+				<div class="login-field"><label for="loginPassword">Password</label><input id="loginPassword" type="password" autocomplete="current-password" required /></div>
+				<p class="login-error" id="loginError" role="alert"></p>
+				<button class="login-submit" type="submit">Sign in</button>
+			</form>
+		</div>
+	</section>
 	<div class="app">
 		<aside class="sidebar">
 			<div class="brand"><div class="brand-mark">S</div><div><strong>stockly</strong><span>wholesale</span></div></div>
 			<nav class="nav">
 				<button class="active" data-view="dashboard"><span class="nav-icon">&#9632;</span> Overview</button>
-				<button data-action="payment"><span class="nav-icon">&#9633;</span> Payments</button>
+				<button data-action="new-bill"><span class="nav-icon">&#9633;</span> Sales & invoices</button>
+				<button data-view="sale-report"><span class="nav-icon">&#9776;</span> Sale report</button>
 				<button data-view="inventory"><span class="nav-icon">&#9673;</span> Inventory</button>
 				<button data-view="ledger"><span class="nav-icon">&#9829;</span> Credit ledger</button>
-				<button><span class="nav-icon">&#8942;</span> Reports</button>
+				<button data-view="reports"><span class="nav-icon">&#8942;</span> Reports</button>
+				<button data-view="financial"><span class="nav-icon">&#8377;</span> Financial</button>
+				<button data-view="tools"><span class="nav-icon">&#9881;</span> Utility & tools</button>
 			</nav>
 			<div class="store-card"><small>Current store</small><p>Shree Ganesh Traders<br><span style="color:#9aafb0">Bandra West, Mumbai</span></p><button>Manage store</button></div>
 		</aside>
 		<main>
 			<header class="topbar">
 				<div><p class="eyebrow">Tuesday, 15 September 2026</p><h1>Good morning, Inshif</h1></div>
-				<div class="top-actions"><button class="icon-button" aria-label="Notifications">&#9673;<span class="notification"></span></button><div class="avatar">AS</div></div>
+				<div class="top-actions"><div class="account-card"><small>Logged in</small><div class="account-user"><span>inshif</span></div><button class="logout-button" id="logoutButton" type="button">Log out</button></div></div>
 			</header>
 			<section class="summary-grid">
 				<article class="summary"><div class="summary-top"><span>Today's sales</span><span class="summary-icon">&#8599;</span></div><h2>Rs 0</h2><p>No sales recorded today</p></article>
@@ -279,15 +492,116 @@
 				<div class="inventory-toolbar"><div class="search" style="flex:1;margin:0"><span class="search-icon">&#9906;</span><input id="inventorySearch" type="search" placeholder="Search inventory..." /></div><div class="inventory-filter"><button class="active" data-stock-filter="all">All <span data-count="all">0</span></button><button data-stock-filter="fresh">Fresh phones <span data-count="fresh">0</span></button><button data-stock-filter="used">Used phones <span data-count="used">0</span></button><button data-stock-filter="low">Low stock <span data-count="low">0</span></button><button data-stock-filter="healthy">Healthy <span data-count="healthy">0</span></button></div></div>
 				<table class="stock-table"><thead><tr><th>Product</th><th>In stock</th><th>Reorder at</th><th>Stock value</th><th>Status</th><th></th></tr></thead><tbody id="stockRows"><tr><td colspan="6"><div class="empty-state"><strong>No inventory added yet</strong><span>Add a mobile product to start tracking stock.</span></div></td></tr></tbody></table>
 			</section>
+			<section class="panel sales-view" id="salesView">
+				<div class="panel-heading"><div><p class="eyebrow" style="margin-bottom:4px">Sales history</p><h2>Old sales & invoices</h2></div><button class="quick-action" id="newInvoiceFromSales" style="width:auto;margin:0;padding:10px 14px">+ New invoice</button></div>
+				<div class="sales-summary"><article><span>Total sales</span><strong>Rs 1,25,000</strong></article><article><span>Invoices</span><strong>3</strong></article><article><span>Credit due</span><strong>Rs 15,000</strong></article></div>
+				<div class="search" style="margin-bottom:10px"><span class="search-icon">&#9906;</span><input id="invoiceSearch" type="search" placeholder="Search old invoices or customers..." /></div>
+				<div class="invoice-list" id="invoiceList">
+					<div class="invoice-row" data-search="INV-1003 kumar mobiles iphone 16 pro"><div class="invoice-customer"><strong>Kumar Mobiles</strong><span>INV-1003 · 15 Sep 2026</span></div><div class="invoice-meta"><span>1 phone · iPhone 16 Pro</span><span>Paid in full</span></div><span class="invoice-status">Paid</span><div class="invoice-total"><strong>Rs 98,000</strong></div><button class="invoice-action" type="button">View</button></div>
+					<div class="invoice-row" data-search="INV-1002 raj telecom iphone 13"><div class="invoice-customer"><strong>Raj Telecom</strong><span>INV-1002 · 12 Sep 2026</span></div><div class="invoice-meta"><span>1 phone · iPhone 13</span><span>Partial payment</span></div><span class="invoice-status credit">Credit</span><div class="invoice-total"><strong>Rs 25,000</strong></div><button class="invoice-action" type="button">View</button></div>
+					<div class="invoice-row" data-search="INV-1001 city phones iphone 16 pro used"><div class="invoice-customer"><strong>City Phones</strong><span>INV-1001 · 08 Sep 2026</span></div><div class="invoice-meta"><span>1 phone · Used iPhone 16 Pro</span><span>Paid in full</span></div><span class="invoice-status">Paid</span><div class="invoice-total"><strong>Rs 2,000</strong></div><button class="invoice-action" type="button">View</button></div>
+				</div>
+			</section>
+			<section class="panel sale-report-view" id="saleReportView">
+				<div class="print-header"><h1>World Network Mobile</h1><p>Location: Mukkam</p><p>Phone: 9539305278</p><h2>Sale Report</h2></div>
+				<div class="panel-heading"><div><p class="eyebrow" style="margin-bottom:4px">Sales report</p><h2>Sale report</h2></div><button class="quick-action" id="printSaleReport" type="button" style="width:auto;margin:0;padding:10px 14px">Print report</button></div>
+				<div class="sale-report-toolbar">
+					<div class="bill-field"><label for="saleReportFrom">From date</label><input id="saleReportFrom" type="date" /></div>
+					<div class="bill-field"><label for="saleReportTo">To date</label><input id="saleReportTo" type="date" /></div>
+					<div class="bill-field"><label for="saleReportCustomer">Customer</label><input id="saleReportCustomer" type="search" placeholder="Search customer" /></div>
+					<div class="bill-field"><label for="saleReportModel">Model</label><input id="saleReportModel" type="search" placeholder="Search model" /></div>
+					<div class="bill-field"><label for="saleReportInvoice">Invoice number</label><input id="saleReportInvoice" type="search" placeholder="Search invoice" /></div>
+					<button class="invoice-action report-clear" id="clearSaleReportFilters" type="button">Clear</button>
+				</div>
+				<div class="sale-report-summary"><article><span>Total sales</span><strong id="saleReportTotal">Rs 0</strong></article><article><span>Invoices</span><strong id="saleReportCount">0</strong></article><article><span>Credit due</span><strong id="saleReportDue">Rs 0</strong></article></div>
+				<form class="sale-edit-form" id="saleEditForm">
+					<div class="bill-field"><label for="saleEditInvoice">Invoice number</label><input id="saleEditInvoice" required /></div>
+					<div class="bill-field"><label for="saleEditDate">Date</label><input id="saleEditDate" type="date" required /></div>
+					<div class="bill-field"><label for="saleEditCustomer">Customer</label><input id="saleEditCustomer" required /></div>
+					<div class="bill-field"><label for="saleEditAmount">Amount (INR)</label><input id="saleEditAmount" type="number" min="0" step="0.01" required /></div>
+					<div class="bill-field"><label for="saleEditReceived">Received (INR)</label><input id="saleEditReceived" type="number" min="0" step="0.01" required /></div>
+					<div class="bill-field"><label for="saleEditDue">Credit due (INR)</label><input id="saleEditDue" type="number" readonly /></div>
+					<div class="bill-field sale-edit-wide"><label for="saleEditProducts">Model / products</label><input id="saleEditProducts" required /></div>
+					<div class="sale-edit-actions"><button class="invoice-action" id="cancelSaleEdit" type="button">Cancel</button><button class="quick-action" type="submit" style="width:auto;margin:0;padding:9px 14px">Save changes</button></div>
+				</form>
+				<div class="sale-report-list" id="saleReportList"></div>
+				<div class="invoice-print-sheet" id="invoicePrintSheet"></div>
+			</section>
 			<section class="panel ledger-view" id="ledgerView">
 				<div class="panel-heading"><div><p class="eyebrow" style="margin-bottom:4px">Customer accounts</p><h2>Credit ledger</h2></div><button class="quick-action" id="addCustomerButton" style="width:auto;margin:0;padding:10px 14px">+ Add customer</button></div>
 				<div class="ledger-total"><article><span>Total credit due</span><strong id="ledgerCreditTotal">Rs 0</strong></article><article><span>Customers due</span><strong id="ledgerCustomerCount">0</strong></article><article><span>Cash received</span><strong id="ledgerCashTotal">Rs 0</strong></article><article><span>Credit sales</span><strong id="ledgerCreditSalesTotal">Rs 0</strong></article></div>
 				<div class="ledger-list" id="ledgerList"><div class="empty-state"><strong>Credit ledger is clear</strong><span>Credit sales will appear here automatically.</span></div></div>
 			</section>
+			<section class="panel inventory-reports" id="reportsView">
+				<div class="panel-heading"><div><p class="eyebrow" style="margin-bottom:4px">Inventory reports</p><h2>Stock movement reports</h2></div></div>
+				<div class="report-filters">
+					<div class="bill-field"><label for="reportFromDate">From date</label><input id="reportFromDate" type="date" /></div>
+					<div class="bill-field"><label for="reportToDate">To date</label><input id="reportToDate" type="date" /></div>
+					<div class="bill-field"><label for="reportModelFilter">Model</label><input id="reportModelFilter" type="search" placeholder="Search model" /></div>
+					<div class="bill-field"><label for="reportImeiFilter">IMEI</label><input id="reportImeiFilter" type="search" placeholder="Search IMEI" /></div>
+					<div class="bill-field"><label for="reportColourFilter">Colour</label><input id="reportColourFilter" type="search" placeholder="Search colour" /></div>
+					<button class="invoice-action report-clear" id="clearReportFilters" type="button">Clear filters</button>
+				</div>
+				<div class="report-grid">
+							<article class="inventory-report-card" id="uaePurchasesCard"><header><div><h3>UAE Purchases</h3><p>Products purchased and received in the UAE.</p></div></header><div class="report-metric"><span>Total purchases</span><strong id="uaePurchaseTotal">AED 0</strong></div><button class="quick-action" id="viewUaePurchases" type="button" style="margin-top:14px">View all purchases</button><button class="quick-action" id="addUaePurchase" type="button" style="margin-top:8px">+ Add UAE purchase</button><div class="purchase-list" id="uaePurchaseList"><span class="purchase-list-title">All UAE purchases</span></div></article>
+							<article class="inventory-report-card"><header><div><h3>Indian Stock</h3><p>Current stock held in India and ready for sale.</p></div></header><div class="report-metric"><span>Stock items</span><strong>0</strong></div></article>
+							<article class="inventory-report-card"><header><div><h3>UAE Stock Transfer to India</h3><p>Stock moved from the UAE warehouse to India.</p></div></header><div class="report-metric"><span>Transfers</span><strong id="uaeTransferCount">0</strong></div><div class="transfer-list" id="uaeTransferList"><div class="empty-state"><strong>No UAE purchase stock yet</strong><span>Saved UAE purchases will appear here.</span></div></div></article>
+							<article class="inventory-report-card"><header><div><h3>Indian Cash Transfer to UAE</h3><p>Record cash sent from India to the UAE.</p></div></header><form id="cashTransferForm" class="cash-transfer-form"><div class="bill-field"><label for="cashTransferDate">Date</label><input id="cashTransferDate" type="date" required /></div><div class="bill-field"><label for="cashTransferInr">INR amount</label><input id="cashTransferInr" type="number" min="0.01" step="0.01" required placeholder="Enter INR" /></div><div class="bill-field"><label for="cashTransferRate">Conversion rate (INR per AED)</label><input id="cashTransferRate" type="number" min="0.01" step="0.0001" required placeholder="e.g. 23.00" /></div><div class="bill-field"><label for="cashTransferAed">AED amount</label><input id="cashTransferAed" type="number" min="0.01" step="0.01" required placeholder="Auto-calculated, editable" /></div><button class="quick-action" type="submit">+ Save cash transfer</button></form><div class="purchase-list" id="cashTransferList"><span class="purchase-list-title">Cash transfer history</span></div></article>
+				</div>
+			</section>
+			<section class="panel financial-view" id="financialView">
+				<div class="panel-heading"><div><p class="eyebrow" style="margin-bottom:4px">Financial overview</p><h2>Financial</h2></div></div>
+				<div class="financial-filters">
+					<div class="bill-field"><label for="financialFromDate">From date</label><input id="financialFromDate" type="date" /></div>
+					<div class="bill-field"><label for="financialToDate">To date</label><input id="financialToDate" type="date" /></div>
+				</div>
+				<div class="financial-summary"><article><span>Total sales</span><strong id="financialSalesTotal">Rs 0</strong></article><article><span>Credit outstanding</span><strong id="financialCreditTotal">Rs 0</strong></article><article><span>Sales dates</span><strong id="financialSalesDates">0</strong></article><article><span>INR cash</span><strong id="financialInrCash">Rs 0</strong></article><article><span>AED cash</span><strong id="financialAedCash">AED 0</strong></article></div>
+				<table class="financial-table"><thead><tr><th>Date</th><th>Total sale</th><th>Credit outstanding</th></tr></thead><tbody id="financialSalesRows"></tbody></table>
+				<div class="expense-grid">
+					<article class="expense-card"><h3>INR expense entry</h3><form class="expense-form" id="inrExpenseForm"><div class="bill-field"><label for="inrExpenseDate">Date</label><input id="inrExpenseDate" type="date" required /></div><div class="bill-field"><label for="inrExpenseCriteria">Criteria</label><input id="inrExpenseCriteria" required placeholder="Expense category" /></div><div class="bill-field"><label for="inrExpenseReason">Reason</label><input id="inrExpenseReason" required placeholder="Reason" /></div><div class="bill-field"><label for="inrExpenseAmount">Amount (INR)</label><input id="inrExpenseAmount" type="number" min="0.01" step="0.01" required placeholder="INR amount" /></div><button class="quick-action" type="submit">+ Save INR expense</button></form><div class="expense-list" id="inrExpenseList"></div></article>
+					<article class="expense-card"><h3>AED expense entry</h3><form class="expense-form" id="aedExpenseForm"><div class="bill-field"><label for="aedExpenseDate">Date</label><input id="aedExpenseDate" type="date" required /></div><div class="bill-field"><label for="aedExpenseCriteria">Criteria</label><input id="aedExpenseCriteria" required placeholder="Expense category" /></div><div class="bill-field"><label for="aedExpenseReason">Reason</label><input id="aedExpenseReason" required placeholder="Reason" /></div><div class="bill-field"><label for="aedExpenseAmount">Amount (AED)</label><input id="aedExpenseAmount" type="number" min="0.01" step="0.01" required placeholder="AED amount" /></div><button class="quick-action" type="submit">+ Save AED expense</button></form><div class="expense-list" id="aedExpenseList"></div></article>
+				</div>
+			</section>
+			<section class="panel tools-view" id="toolsView">
+				<div class="panel-heading"><div><p class="eyebrow" style="margin-bottom:4px">Utility & tools</p><h2>Model list</h2></div><span class="bill-product-count" id="modelCount">0 models</span></div>
+				<div class="model-tools-layout">
+					<div><div class="search" style="margin-bottom:10px"><span class="search-icon">&#9906;</span><input id="modelSearch" type="search" placeholder="Search models..." /></div><div class="model-list" id="modelList"></div></div>
+					<div class="add-model-card">
+						<h3>Add model</h3>
+						<p>Add a phone model here so it can be selected when recording stock and purchases.</p>
+						<form class="add-model-form" id="addModelForm">
+							<input id="newModelName" required placeholder="Model name, e.g. iPhone 17 Pro" />
+							<select id="newModelBrand"><option>Apple</option><option>Samsung</option><option>Google</option><option>Other</option></select>
+							<button class="quick-action" type="submit">+ Add model</button>
+						</form>
+					</div>
+					<div class="add-model-card">
+						<h3>Add customer</h3>
+						<p>Create a customer account and keep the complete customer list in Utility & Tools.</p>
+						<form class="add-model-form" id="toolsCustomerForm">
+							<input id="toolsCustomerName" required placeholder="Customer name" />
+							<input id="toolsCustomerPhone" inputmode="tel" placeholder="Phone number (optional)" />
+							<input id="toolsCustomerLocation" placeholder="Shop location (optional)" />
+							<button class="quick-action" type="submit">+ Add customer</button>
+						</form>
+					</div>
+				</div>
+				<div class="panel-heading" style="margin-top:22px;margin-bottom:10px"><h2>All customers</h2><span class="bill-product-count" id="toolsCustomerCount">0 customers</span></div>
+				<div class="search" style="margin-bottom:10px"><span class="search-icon">&#9906;</span><input id="toolsCustomerSearch" type="search" placeholder="Search customers..." /></div>
+				<div class="customer-tools-list" id="toolsCustomerList"></div>
+			</section>
 		</main>
 	</div>
-	<nav class="mobile-nav" aria-label="Main navigation"><button type="button" class="active" data-view="dashboard"><i>&#9632;</i>Home</button><button type="button" data-action="new-bill"><i>&#9633;</i>Sales</button><button type="button" data-action="payment"><i>₹</i>Payment</button><button type="button" data-view="inventory"><i>&#9673;</i>Stock</button><button type="button" data-view="ledger"><i>&#9829;</i>Ledger</button></nav>
+	<nav class="mobile-nav" aria-label="Main navigation"><button type="button" class="active" data-view="dashboard"><i>&#9632;</i>Home</button><button type="button" data-action="new-bill"><i>&#9633;</i>Sales</button><button type="button" data-action="payment"><i>₹</i>Payment</button><button type="button" data-view="inventory"><i>&#9673;</i>Stock</button><button type="button" data-view="sale-report"><i>&#9776;</i>Report</button><button type="button" data-view="financial"><i>&#8377;</i>Finance</button><button type="button" data-view="tools"><i>&#9881;</i>Tools</button></nav>
 	<div class="toast" id="toast">Added to current bill</div>
+	<div class="pin-backdrop" id="pinBackdrop" role="dialog" aria-modal="true" aria-labelledby="pinTitle">
+		<form class="pin-card" id="pinForm">
+			<h2 id="pinTitle">Delete confirmation</h2>
+			<p>Enter your PIN to continue deleting this item.</p>
+			<input id="deletePin" type="password" inputmode="numeric" maxlength="2" autocomplete="off" aria-label="Delete PIN" required />
+			<div class="pin-actions"><button type="button" class="pin-cancel" id="cancelDeletePin">Cancel</button><button type="submit" class="pin-submit">Confirm delete</button></div>
+		</form>
+	</div>
 	<div class="bill-backdrop" id="billBackdrop" role="dialog" aria-modal="true" aria-labelledby="billTitle">
 		<form class="bill-modal" id="billForm">
 			<div class="bill-modal-header"><div><h2 id="billTitle">Payment & invoice</h2><p>Record a wholesale sale and its payment status.</p></div><button type="button" class="close-bill" id="closeBill" aria-label="Close bill">&times;</button></div>
@@ -295,7 +609,7 @@
 				<div class="bill-field"><label for="billCustomer">Customer name</label><input id="billCustomer" list="customerNames" required placeholder="Search or enter customer name" /><datalist id="customerNames"></datalist></div>
 				<div class="customer-credit-note" id="customerCreditNote"><span>Existing credit due</span><strong id="customerCreditAmount">Rs 0</strong></div>
 				<div class="bill-entry-header"><span class="bill-product-count" id="billPhoneCount">1 product</span><div style="display:flex;gap:10px;align-items:center"><button type="button" class="text-button" id="clearBillPhones">Clear all products</button><button type="button" class="add-item" id="addBillPhone">+ Add another phone</button></div></div>
-				<div id="billPhones"><div class="bill-phone-entry"><div class="bill-entry-header"><span class="bill-entry-label">Phone 1</span><button type="button" class="delete-phone" aria-label="Delete phone">Delete</button></div><div class="bill-field bill-imei-field visible"><label>2. IMEI number</label><div class="scan-row"><input class="bill-imei" id="billImei1" inputmode="numeric" maxlength="15" pattern="[0-9]{15}" required placeholder="Scan or enter 15-digit IMEI" /><button type="button" class="scan-imei" data-scan-imei="billImei1">Scan</button></div><span class="imei-status bill-imei-status">Scan the phone IMEI to find saved details</span></div><div class="phone-details unknown bill-phone-details"><div class="phone-details-title">3. Phone details</div><div class="phone-detail"><span>Model</span><span data-detail="model">Waiting for IMEI</span></div><div class="phone-detail"><span>Condition</span><span data-detail="condition">Waiting for IMEI</span></div><div class="phone-detail"><span>Color</span><span data-detail="color">Waiting for IMEI</span></div><div class="phone-detail"><span>Storage</span><span data-detail="storage">Waiting for IMEI</span></div><div class="phone-detail"><span>Battery</span><span data-detail="battery">Waiting for IMEI</span></div><div class="phone-detail"><span>Price</span><span data-detail="price">Waiting for IMEI</span></div></div></div></div>
+				<div id="billPhones"><div class="bill-phone-entry"><div class="bill-entry-header"><span class="bill-entry-label">Phone 1</span><button type="button" class="delete-phone" aria-label="Delete phone">Delete</button></div><div class="bill-field bill-imei-field visible"><label>2. IMEI number <span style="font-weight:400">(optional)</span></label><div class="scan-row"><input class="bill-imei" id="billImei1" inputmode="numeric" maxlength="15" placeholder="Scan or enter IMEI" /><button type="button" class="scan-imei" data-scan-imei="billImei1">Scan</button></div><span class="imei-status bill-imei-status">Optional - scan or enter IMEI when available</span></div><div class="phone-details unknown bill-phone-details"><div class="phone-details-title">3. Phone details</div><div class="phone-detail"><span>Model</span><span data-detail="model">Waiting for IMEI</span></div><div class="phone-detail"><span>Condition</span><span data-detail="condition">Waiting for IMEI</span></div><div class="phone-detail"><span>Color</span><span data-detail="color">Waiting for IMEI</span></div><div class="phone-detail"><span>Storage</span><span data-detail="storage">Waiting for IMEI</span></div><div class="phone-detail"><span>Battery</span><span data-detail="battery">Waiting for IMEI</span></div><div class="phone-detail"><span>Price</span><span data-detail="price">Waiting for IMEI</span></div></div></div></div>
 				<div class="bill-field bill-items" id="billItems" style="display:none"><div class="bill-item"><select class="bill-product"><option value="0">Phone</option></select><input class="bill-quantity" type="number" min="1" value="1" aria-label="Quantity" /></div></div>
 				<label class="bill-mobile-toggle" style="display:none"><input id="billMobileToggle" type="checkbox" checked /> Mobile phone bill</label>
 				<div class="bill-total"><span>Invoice total</span><strong id="billTotal">Rs 0</strong></div>
@@ -310,14 +624,14 @@
 		<form class="bill-modal" id="mobileForm">
 			<div class="bill-modal-header"><div><h2 id="mobileTitle">Add mobile product</h2><p>Track every device separately by IMEI.</p></div><button type="button" class="close-bill" id="closeMobile" aria-label="Close mobile product">&times;</button></div>
 			<div class="bill-form">
-				<div class="bill-field"><label for="mobileImei">IMEI number</label><div class="scan-row"><input id="mobileImei" inputmode="numeric" maxlength="15" pattern="[0-9]{15}" required placeholder="Enter 15-digit IMEI" /><button type="button" class="scan-imei" data-scan-imei="mobileImei">Scan</button></div><span class="imei-status" id="imeiStatus">15 digits required</span></div>
+				<div class="bill-field"><label for="mobileImei">IMEI number <span style="font-weight:400">(optional)</span></label><div class="scan-row"><input id="mobileImei" inputmode="numeric" maxlength="15" placeholder="Enter IMEI when available" /><button type="button" class="scan-imei" data-scan-imei="mobileImei">Scan</button></div><span class="imei-status" id="imeiStatus">Optional - scan or enter IMEI when available</span></div>
 				<div class="mobile-form-note">IMEI can validate the device number, but phone color is not encoded in it. Confirm the color from the handset or purchase invoice.</div>
 				<div class="bill-field"><label for="mobileModel">iPhone model</label><select id="mobileModel" required><option value="">Select iPhone model</option><option>iPhone SE</option><option>iPhone 11</option><option>iPhone 12</option><option>iPhone 13</option><option>iPhone 13 Pro</option><option>iPhone 14</option><option>iPhone 14 Plus</option><option>iPhone 14 Pro</option><option>iPhone 15</option><option>iPhone 15 Plus</option><option>iPhone 15 Pro</option><option>iPhone 15 Pro Max</option><option>iPhone 16</option><option>iPhone 16 Plus</option><option>iPhone 16 Pro</option><option>iPhone 16 Pro Max</option></select></div>
 				<div class="bill-field"><label for="mobileCondition">Phone condition</label><select id="mobileCondition" required><option value="fresh">Fresh phone</option><option value="used">Used phone</option></select></div>
 				<div class="bill-field battery-field" id="batteryField"><label for="batteryHealth">Battery health</label><select id="batteryHealth"><option value="">Select battery health</option><option>100%</option><option>95% - 99%</option><option>90% - 94%</option><option>85% - 89%</option><option>80% - 84%</option><option>Below 80%</option></select></div>
 				<div class="bill-field"><label for="mobileColor">Color</label><select id="mobileColor"><option>Black</option><option>White</option><option>Blue</option><option>Natural Titanium</option><option>Pink</option><option>Other</option></select></div>
 				<div class="bill-field"><label for="mobileStorage">Storage</label><select id="mobileStorage"><option>128 GB</option><option>256 GB</option><option>512 GB</option><option>1 TB</option></select></div>
-				<div class="bill-field"><label for="mobilePrice">Purchase price</label><input id="mobilePrice" type="number" min="0" required placeholder="Rs" /></div>
+				<div class="bill-field"><label for="mobilePrice">India sale price (INR)</label><input id="mobilePrice" type="number" min="0" required placeholder="INR" /></div>
 				<div class="bill-actions"><button type="button" class="cancel-bill" id="cancelMobile">Cancel</button><button type="submit" class="save-bill">Save mobile</button></div>
 			</div>
 		</form>
@@ -326,7 +640,7 @@
 		<div class="bill-modal"><div class="bill-modal-header"><div><h2 id="scanTitle">Scan IMEI</h2><p>Point the camera at the IMEI barcode.</p></div><button type="button" class="close-bill" id="closeScan" aria-label="Close scanner">&times;</button></div><video id="scanVideo" autoplay playsinline style="width:100%;border-radius:12px;background:#17252b;aspect-ratio:4/3;object-fit:cover"></video><p id="scanMessage" style="color:var(--muted);font-size:11px;margin:12px 0 0">Starting camera...</p></div>
 	</div>
 	<div class="bill-backdrop" id="customerBackdrop" role="dialog" aria-modal="true" aria-labelledby="customerTitle">
-		<form class="bill-modal customer-form" id="customerForm"><div class="bill-modal-header"><div><h2 id="customerTitle">Add customer</h2><p>Create an account for credit sales and collections.</p></div><button type="button" class="close-bill" id="closeCustomer" aria-label="Close customer form">&times;</button></div><div class="bill-field"><label for="customerName">Customer name</label><input id="customerName" required placeholder="e.g. Kumar Mobiles" /></div><div class="bill-field"><label for="customerPhone">Phone number</label><input id="customerPhone" inputmode="tel" placeholder="Optional" /></div><div class="bill-actions"><button type="button" class="cancel-bill" id="cancelCustomer">Cancel</button><button type="submit" class="save-bill">Save customer</button></div></form>
+		<form class="bill-modal customer-form" id="customerForm"><div class="bill-modal-header"><div><h2 id="customerTitle">Add customer</h2><p>Create an account for credit sales and collections.</p></div><button type="button" class="close-bill" id="closeCustomer" aria-label="Close customer form">&times;</button></div><div class="bill-field"><label for="customerName">Customer name</label><input id="customerName" required placeholder="e.g. Kumar Mobiles" /></div><div class="bill-field"><label for="customerPhone">Phone number</label><input id="customerPhone" inputmode="tel" placeholder="Optional" /></div><div class="bill-field"><label for="customerLocation">Shop location</label><input id="customerLocation" placeholder="Optional" /></div><div class="bill-actions"><button type="button" class="cancel-bill" id="cancelCustomer">Cancel</button><button type="submit" class="save-bill">Save customer</button></div></form>
 	</div>
 	<div class="bill-backdrop" id="paymentBackdrop" role="dialog" aria-modal="true" aria-labelledby="paymentTitle">
 		<form class="bill-modal customer-form" id="paymentForm"><div class="bill-modal-header"><div><h2 id="paymentTitle">Record payment</h2><p>Save a customer collection to their ledger.</p></div><button type="button" class="close-bill" id="closePayment" aria-label="Close payment form">&times;</button></div><div class="bill-field"><label for="paymentCustomer">Customer name</label><input id="paymentCustomer" list="customerNames" required placeholder="Select customer" /></div><div class="customer-credit-note" id="paymentOutstandingNote"><span>Outstanding amount</span><strong id="paymentOutstandingAmount">Rs 0</strong></div><div class="bill-field"><label for="paymentAmount">Amount received</label><input id="paymentAmount" type="number" min="1" required placeholder="Rs" /></div><div class="customer-credit-note" id="paymentBalanceNote"><span>Balance after payment</span><strong id="paymentBalanceAmount">Rs 0</strong></div><div class="bill-field"><label for="paymentMethod">Payment option</label><select id="paymentMethod"><option>Cash</option><option>UPI</option><option>Bank transfer</option><option>Card</option></select></div><div class="bill-actions"><button type="button" class="cancel-bill" id="cancelPayment">Cancel</button><button type="submit" class="save-bill">Save payment</button></div></form>
@@ -334,13 +648,69 @@
 	<div class="bill-backdrop" id="reportBackdrop" role="dialog" aria-modal="true" aria-labelledby="reportTitle">
 		<div class="bill-modal"><div class="bill-modal-header"><div><h2 id="reportTitle">Customer report</h2><p id="reportPhone">Payment and sales history.</p></div><button type="button" class="close-bill" id="closeReport" aria-label="Close report">&times;</button></div><div class="report-summary"><div><span>Total product amount</span><strong id="reportProductTotal">Rs 0</strong></div><div><span>Total received</span><strong id="reportReceivedTotal">Rs 0</strong></div><div><span>Credit due</span><strong id="reportDueTotal">Rs 0</strong></div><div><span>Sales count</span><strong id="reportSalesCount">0</strong></div></div><div id="reportEntries"><div class="empty-state"><strong>No transactions yet</strong></div></div></div>
 	</div>
+	<div class="bill-backdrop" id="uaePurchaseBackdrop" role="dialog" aria-modal="true" aria-labelledby="uaePurchaseTitle">
+		<form class="bill-modal" id="uaePurchaseForm">
+			<div class="bill-modal-header"><div><h2 id="uaePurchaseTitle">UAE purchase</h2><p>Add one or more mobile phones purchased in AED.</p></div><button type="button" class="close-bill" id="closeUaePurchase" aria-label="Close UAE purchase">&times;</button></div>
+			<div class="bill-form">
+				<div class="bill-field"><label for="uaePurchaseDate">Purchase date</label><input id="uaePurchaseDate" type="date" required /></div>
+				<div class="bill-entry-header"><span class="bill-product-count" id="uaePurchaseCount">1 mobile</span><button type="button" class="add-item" id="addUaePurchaseItem">+ Add another mobile</button></div>
+				<div id="uaePurchaseItems">
+					<div class="bill-phone-entry uae-purchase-entry">
+						<div class="bill-entry-header"><span class="bill-entry-label">Mobile 1</span><button type="button" class="delete-phone" aria-label="Delete mobile">Delete</button></div>
+						<div class="bill-field"><label>Mobile model</label><select class="uae-purchase-model" required><option value="">Select model</option></select></div>
+						<div class="bill-field"><label>Phone condition</label><select class="uae-purchase-condition"><option>Fresh phone</option><option>Used phone</option></select></div>
+						<div class="bill-field battery-field uae-purchase-battery-field"><label>Battery health</label><select class="uae-purchase-battery"><option value="">Select battery health</option><option>100%</option><option>95% - 99%</option><option>90% - 94%</option><option>85% - 89%</option><option>80% - 84%</option><option>Below 80%</option></select></div>
+						<div class="bill-field"><label>Colour</label><select class="uae-purchase-colour"><option>Black</option><option>White</option><option>Blue</option><option>Natural Titanium</option><option>Pink</option><option>Other</option></select></div>
+						<div class="bill-field"><label>Storage</label><select class="uae-purchase-storage"><option>128 GB</option><option>256 GB</option><option>512 GB</option><option>1 TB</option></select></div>
+						<div class="bill-field"><label>IMEI number <span style="font-weight:400">(optional)</span></label><div class="scan-row"><input class="uae-purchase-imei" inputmode="numeric" maxlength="15" placeholder="15-digit IMEI" /><button type="button" class="scan-imei uae-purchase-scan">Scan</button></div></div>
+						<div class="bill-field"><label>Purchase price (AED)</label><input class="uae-purchase-price" type="number" min="0" step="0.01" required placeholder="AED" /></div>
+					</div>
+				</div>
+				<div class="bill-total"><span>Total UAE purchase</span><strong id="uaePurchaseFormTotal">AED 0</strong></div>
+				<div class="bill-actions"><button type="button" class="cancel-bill" id="cancelUaePurchase">Cancel</button><button type="submit" class="save-bill">Save purchase</button></div>
+			</div>
+		</form>
+	</div>
 	<script>
+		const loginForm = document.getElementById('loginForm');
+		const loginUserId = document.getElementById('loginUserId');
+		const loginPassword = document.getElementById('loginPassword');
+		const loginError = document.getElementById('loginError');
+		if (sessionStorage.getItem('stockly-authenticated') === 'true') document.body.classList.add('authenticated');
+		loginForm.addEventListener('submit', event => {
+			event.preventDefault();
+			if (loginUserId.value.trim() === 'inshif' && loginPassword.value === '122333') {
+				sessionStorage.setItem('stockly-authenticated', 'true');
+				document.body.classList.add('authenticated');
+				loginError.textContent = '';
+				return;
+			}
+			loginError.textContent = 'Incorrect user ID or password.';
+			loginPassword.select();
+		});
+		document.getElementById('logoutButton').addEventListener('click', () => {
+			sessionStorage.removeItem('stockly-authenticated');
+			document.body.classList.remove('authenticated');
+			loginForm.reset();
+			loginUserId.focus();
+		});
 		const toast = document.getElementById('toast');
 		const search = document.getElementById('search');
 		const products = [...document.querySelectorAll('.product')];
 		const dashboardView = document.getElementById('dashboardView');
 		const inventoryView = document.getElementById('inventoryView');
 		const totalProductsCount = document.getElementById('totalProductsCount');
+		const saleReportFrom = document.getElementById('saleReportFrom');
+		const saleReportTo = document.getElementById('saleReportTo');
+		const saleReportCustomer = document.getElementById('saleReportCustomer');
+		const saleReportModel = document.getElementById('saleReportModel');
+		const saleReportInvoice = document.getElementById('saleReportInvoice');
+		const saleReportList = document.getElementById('saleReportList');
+		const saleReportTotal = document.getElementById('saleReportTotal');
+		const saleReportCount = document.getElementById('saleReportCount');
+		const saleReportDue = document.getElementById('saleReportDue');
+		const saleEditForm = document.getElementById('saleEditForm');
+		let editingSaleIndex = null;
 		const billBackdrop = document.getElementById('billBackdrop');
 		const billForm = document.getElementById('billForm');
 		const billCustomer = document.getElementById('billCustomer');
@@ -378,6 +748,7 @@
 		const customerForm = document.getElementById('customerForm');
 		const customerName = document.getElementById('customerName');
 		const customerPhone = document.getElementById('customerPhone');
+		const customerLocation = document.getElementById('customerLocation');
 		const paymentBackdrop = document.getElementById('paymentBackdrop');
 		const paymentForm = document.getElementById('paymentForm');
 		const paymentCustomer = document.getElementById('paymentCustomer');
@@ -395,6 +766,189 @@
 		const reportDueTotal = document.getElementById('reportDueTotal');
 		const reportSalesCount = document.getElementById('reportSalesCount');
 		const reportEntries = document.getElementById('reportEntries');
+		const uaePurchaseBackdrop = document.getElementById('uaePurchaseBackdrop');
+		const uaePurchaseForm = document.getElementById('uaePurchaseForm');
+		const uaePurchaseItems = document.getElementById('uaePurchaseItems');
+		const uaePurchaseCount = document.getElementById('uaePurchaseCount');
+		const uaePurchaseFormTotal = document.getElementById('uaePurchaseFormTotal');
+		const uaePurchaseTotal = document.getElementById('uaePurchaseTotal');
+		const uaePurchaseList = document.getElementById('uaePurchaseList');
+		const uaeTransferList = document.getElementById('uaeTransferList');
+		const uaeTransferCount = document.getElementById('uaeTransferCount');
+		const uaePurchaseStorageKey = 'stockly-uae-purchases-v1';
+		let editingUaePurchaseIndex = null;
+		const reportFromDate = document.getElementById('reportFromDate');
+		const reportToDate = document.getElementById('reportToDate');
+		const reportModelFilter = document.getElementById('reportModelFilter');
+		const reportImeiFilter = document.getElementById('reportImeiFilter');
+		const reportColourFilter = document.getElementById('reportColourFilter');
+		const cashTransferStorageKey = 'stockly-indian-cash-transfers-v1';
+		const cashTransferForm = document.getElementById('cashTransferForm');
+		const cashTransferDate = document.getElementById('cashTransferDate');
+		const cashTransferInr = document.getElementById('cashTransferInr');
+		const cashTransferRate = document.getElementById('cashTransferRate');
+		const cashTransferAed = document.getElementById('cashTransferAed');
+		const cashTransferList = document.getElementById('cashTransferList');
+		function renderCashTransfers() {
+			const transfers = JSON.parse(localStorage.getItem(cashTransferStorageKey) || '[]');
+			cashTransferList.innerHTML = '<span class="purchase-list-title">Cash transfer history</span>' + (transfers.length ? transfers.slice().reverse().map(transfer => '<div class="purchase-row"><div class="purchase-info"><strong>' + transfer.date + '</strong><span>INR ' + Number(transfer.inr).toLocaleString('en-IN', { minimumFractionDigits: 2 }) + ' · Rate ' + Number(transfer.rate).toFixed(4) + '</span></div><span class="invoice-status">AED ' + Number(transfer.aed).toLocaleString('en-AE', { minimumFractionDigits: 2 }) + '</span></div>').join('') : '<div class="empty-state"><span>No cash transfers recorded yet.</span></div>');
+		}
+		function updateCashTransferAed() {
+			const inr = Number(cashTransferInr.value);
+			const rate = Number(cashTransferRate.value);
+			cashTransferAed.value = inr > 0 && rate > 0 ? (inr / rate).toFixed(2) : '';
+		}
+		[cashTransferInr, cashTransferRate].forEach(input => input.addEventListener('input', updateCashTransferAed));
+		cashTransferForm.addEventListener('submit', event => {
+			event.preventDefault();
+			const inr = Number(cashTransferInr.value);
+			const rate = Number(cashTransferRate.value);
+			const aed = Number(cashTransferAed.value);
+			if (!inr || !rate || rate <= 0 || !aed || aed <= 0) { notify('Enter valid INR, conversion rate, and AED amount'); return; }
+			const transfers = JSON.parse(localStorage.getItem(cashTransferStorageKey) || '[]');
+			transfers.push({ date: cashTransferDate.value, inr, rate, aed });
+			localStorage.setItem(cashTransferStorageKey, JSON.stringify(transfers));
+			cashTransferForm.reset();
+			cashTransferDate.value = new Date().toISOString().slice(0, 10);
+			updateCashTransferAed();
+			renderCashTransfers();
+			renderFinancial();
+			notify('Indian cash transfer saved');
+		});
+		cashTransferDate.value = new Date().toISOString().slice(0, 10);
+		renderCashTransfers();
+		const financialFromDate = document.getElementById('financialFromDate');
+		const financialToDate = document.getElementById('financialToDate');
+		const financialSalesTotal = document.getElementById('financialSalesTotal');
+		const financialCreditTotal = document.getElementById('financialCreditTotal');
+		const financialSalesDates = document.getElementById('financialSalesDates');
+		const financialInrCash = document.getElementById('financialInrCash');
+		const financialAedCash = document.getElementById('financialAedCash');
+		const financialSalesRows = document.getElementById('financialSalesRows');
+		const expenseStorageKeys = { INR: 'stockly-inr-expenses-v1', AED: 'stockly-aed-expenses-v1' };
+		function financialDate(entry) {
+			if (entry.dateKey) return entry.dateKey;
+			const match = String(entry.date || '').match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+			return match ? match[3] + '-' + match[2].padStart(2, '0') + '-' + match[1].padStart(2, '0') : (entry.date || '');
+		}
+		function renderFinancial() {
+			const from = financialFromDate.value;
+			const to = financialToDate.value;
+			const sales = ledgerActivity.filter(entry => entry.type === 'sale' && (!from || financialDate(entry) >= from) && (!to || financialDate(entry) <= to));
+			const inrExpenses = JSON.parse(localStorage.getItem(expenseStorageKeys.INR) || '[]').filter(expense => (!from || expense.date >= from) && (!to || expense.date <= to));
+			const cashTransfers = JSON.parse(localStorage.getItem(cashTransferStorageKey) || '[]').filter(transfer => (!from || transfer.date >= from) && (!to || transfer.date <= to));
+			const byDate = {};
+			sales.forEach(entry => {
+				const date = financialDate(entry);
+				if (!byDate[date]) byDate[date] = { sale: 0, credit: 0 };
+				byDate[date].sale += Number(entry.amount || 0);
+				byDate[date].credit += Number(entry.due || 0);
+			});
+			const dates = Object.keys(byDate).sort().reverse();
+			financialSalesTotal.textContent = formatRupees(sales.reduce((sum, entry) => sum + Number(entry.amount || 0), 0));
+			financialCreditTotal.textContent = formatRupees(sales.reduce((sum, entry) => sum + Number(entry.due || 0), 0));
+			financialSalesDates.textContent = dates.length;
+			const totalSales = sales.reduce((sum, entry) => sum + Number(entry.amount || 0), 0);
+			const totalInrExpenses = inrExpenses.reduce((sum, expense) => sum + Number(expense.amount || 0), 0);
+			const totalTransferredInr = cashTransfers.reduce((sum, transfer) => sum + Number(transfer.inr || 0), 0);
+			const totalTransferredAed = cashTransfers.reduce((sum, transfer) => sum + Number(transfer.aed || 0), 0);
+			financialInrCash.textContent = formatRupees(totalSales - totalInrExpenses - totalTransferredInr);
+			financialAedCash.textContent = 'AED ' + totalTransferredAed.toLocaleString('en-AE', { minimumFractionDigits: 2 });
+			financialSalesRows.innerHTML = dates.length ? dates.map(date => '<tr><td>' + date + '</td><td>' + formatRupees(byDate[date].sale) + '</td><td>' + formatRupees(byDate[date].credit) + '</td></tr>').join('') : '<tr><td colspan="3">No sales recorded for this date range.</td></tr>';
+		}
+		let editingExpense = null;
+		function renderExpenses(currency, list) {
+			const expenses = JSON.parse(localStorage.getItem(expenseStorageKeys[currency]) || '[]');
+			list.innerHTML = '';
+			if (!expenses.length) {
+				list.innerHTML = '<div class="empty-state"><span>No ' + currency + ' expenses recorded yet.</span></div>';
+				return;
+			}
+			expenses.slice().reverse().forEach((expense, reverseIndex) => {
+				const index = expenses.length - 1 - reverseIndex;
+				const row = document.createElement('div');
+				row.className = 'expense-row';
+				const info = document.createElement('div');
+				info.className = 'expense-row-info';
+				info.innerHTML = '<strong>' + expense.date + '</strong><span>' + expense.criteria + ' · ' + expense.reason + '</span>';
+				const amount = document.createElement('strong');
+				amount.textContent = currency + ' ' + Number(expense.amount).toLocaleString('en-IN', { minimumFractionDigits: 2 });
+				const actions = document.createElement('div');
+				actions.className = 'expense-actions';
+				const viewButton = document.createElement('button');
+				viewButton.className = 'status-view';
+				viewButton.type = 'button';
+				viewButton.textContent = 'View status';
+				viewButton.addEventListener('click', () => notify(currency + ' expense: ' + expense.criteria + ' · ' + expense.reason + ' · ' + Number(expense.amount).toLocaleString('en-IN', { minimumFractionDigits: 2 })));
+				const deleteButton = document.createElement('button');
+				deleteButton.className = 'action-button delete';
+				deleteButton.type = 'button';
+				deleteButton.textContent = 'Delete';
+				deleteButton.addEventListener('click', () => verifyDeletePin(() => {
+					const currentExpenses = JSON.parse(localStorage.getItem(expenseStorageKeys[currency]) || '[]');
+					currentExpenses.splice(index, 1);
+					localStorage.setItem(expenseStorageKeys[currency], JSON.stringify(currentExpenses));
+					renderExpenses(currency, list);
+					notify(currency + ' expense deleted');
+				}));
+				const editButton = document.createElement('button');
+				editButton.className = 'action-button edit';
+				editButton.type = 'button';
+				editButton.textContent = 'Edit';
+				editButton.addEventListener('click', () => {
+					editingExpense = { currency, index };
+					const fields = currency === 'INR'
+						? { date: inrExpenseDate, criteria: document.getElementById('inrExpenseCriteria'), reason: document.getElementById('inrExpenseReason'), amount: document.getElementById('inrExpenseAmount') }
+						: { date: aedExpenseDate, criteria: document.getElementById('aedExpenseCriteria'), reason: document.getElementById('aedExpenseReason'), amount: document.getElementById('aedExpenseAmount') };
+					fields.date.value = expense.date;
+					fields.criteria.value = expense.criteria;
+					fields.reason.value = expense.reason;
+					fields.amount.value = expense.amount;
+					(currency === 'INR' ? inrExpenseForm : aedExpenseForm).scrollIntoView({ behavior: 'smooth', block: 'center' });
+					notify('Edit ' + currency + ' expense and save');
+				});
+				actions.append(viewButton, deleteButton, editButton);
+				row.append(info, amount, actions);
+				list.appendChild(row);
+			});
+		}
+		function saveExpense(currency, form, fields, list) {
+			const expenses = JSON.parse(localStorage.getItem(expenseStorageKeys[currency]) || '[]');
+			const expense = { date: fields.date.value, criteria: fields.criteria.value.trim(), reason: fields.reason.value.trim(), amount: Number(fields.amount.value) };
+			if (editingExpense && editingExpense.currency === currency) expenses[editingExpense.index] = expense;
+			else expenses.push(expense);
+			localStorage.setItem(expenseStorageKeys[currency], JSON.stringify(expenses));
+			const wasEditing = editingExpense && editingExpense.currency === currency;
+			editingExpense = null;
+			form.reset();
+			fields.date.value = new Date().toISOString().slice(0, 10);
+			renderExpenses(currency, list);
+			renderFinancial();
+			notify(currency + ' expense ' + (wasEditing ? 'updated' : 'saved'));
+		}
+		const inrExpenseForm = document.getElementById('inrExpenseForm');
+		const aedExpenseForm = document.getElementById('aedExpenseForm');
+		const inrExpenseDate = document.getElementById('inrExpenseDate');
+		const aedExpenseDate = document.getElementById('aedExpenseDate');
+		const inrExpenseList = document.getElementById('inrExpenseList');
+		const aedExpenseList = document.getElementById('aedExpenseList');
+		inrExpenseForm.addEventListener('submit', event => { event.preventDefault(); saveExpense('INR', inrExpenseForm, { date: inrExpenseDate, criteria: document.getElementById('inrExpenseCriteria'), reason: document.getElementById('inrExpenseReason'), amount: document.getElementById('inrExpenseAmount') }, inrExpenseList); });
+		aedExpenseForm.addEventListener('submit', event => { event.preventDefault(); saveExpense('AED', aedExpenseForm, { date: aedExpenseDate, criteria: document.getElementById('aedExpenseCriteria'), reason: document.getElementById('aedExpenseReason'), amount: document.getElementById('aedExpenseAmount') }, aedExpenseList); });
+		[financialFromDate, financialToDate].forEach(input => input.addEventListener('input', renderFinancial));
+		inrExpenseDate.value = new Date().toISOString().slice(0, 10);
+		aedExpenseDate.value = new Date().toISOString().slice(0, 10);
+		renderExpenses('INR', inrExpenseList);
+		renderExpenses('AED', aedExpenseList);
+		setTimeout(renderFinancial, 0);
+		function filterReportPurchases(purchases) {
+			const fromDate = reportFromDate.value;
+			const toDate = reportToDate.value;
+			const model = reportModelFilter.value.toLowerCase().trim();
+			const imei = reportImeiFilter.value.toLowerCase().trim();
+			const colour = reportColourFilter.value.toLowerCase().trim();
+			return purchases.filter(purchase => (!fromDate || purchase.date >= fromDate) && (!toDate || purchase.date <= toDate) && (!model || purchase.model.toLowerCase().includes(model)) && (!imei || (purchase.imei || '').toLowerCase().includes(imei)) && (!colour || (purchase.colour || '').toLowerCase().includes(colour)));
+		}
+		const uaePurchaseDate = document.getElementById('uaePurchaseDate');
 		let scanStream;
 		let scanTimer;
 		const mobileBackdrop = document.getElementById('mobileBackdrop');
@@ -405,25 +959,116 @@
 		const batteryField = document.getElementById('batteryField');
 		const batteryHealth = document.getElementById('batteryHealth');
 		let toastTimer;
+		let pendingUaeTransfer = null;
+		let editingInventoryRow = null;
 		function notify(message) {
 			toast.textContent = message;
 			toast.classList.add('show');
 			clearTimeout(toastTimer);
 			toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
 		}
+		const pinBackdrop = document.getElementById('pinBackdrop');
+		const pinForm = document.getElementById('pinForm');
+		const deletePin = document.getElementById('deletePin');
+		let pendingDeleteAction = null;
+		function verifyDeletePin(action) {
+			pendingDeleteAction = action;
+			deletePin.value = '';
+			pinBackdrop.classList.add('open');
+			deletePin.focus();
+		}
+		function closeDeletePin() {
+			pendingDeleteAction = null;
+			pinBackdrop.classList.remove('open');
+			pinForm.reset();
+		}
+		pinForm.addEventListener('submit', event => {
+			event.preventDefault();
+			if (deletePin.value !== '12') { notify('Incorrect delete PIN'); deletePin.select(); return; }
+			const action = pendingDeleteAction;
+			closeDeletePin();
+			if (action) action();
+		});
+		document.getElementById('cancelDeletePin').addEventListener('click', closeDeletePin);
+		pinBackdrop.addEventListener('click', event => { if (event.target === pinBackdrop) closeDeletePin(); });
 		const ledgerStorageKey = 'stockly-credit-ledger-v1';
 		const ledgerReportStorageKey = 'stockly-credit-report-v1';
 		const ledgerActivityStorageKey = 'stockly-credit-activity-v1';
 		let customerLedger = JSON.parse(localStorage.getItem(ledgerStorageKey) || '[]');
 		let ledgerReport = JSON.parse(localStorage.getItem(ledgerReportStorageKey) || '{"cashReceived":0,"creditSales":0}');
 		let ledgerActivity = JSON.parse(localStorage.getItem(ledgerActivityStorageKey) || '[]');
+		let legacyInvoiceNumber = 1001;
+		ledgerActivity.forEach(entry => {
+			if (entry.type === 'sale' && !entry.invoiceNo) entry.invoiceNo = 'INV-' + String(legacyInvoiceNumber++).padStart(4, '0');
+		});
+		if (ledgerActivity.some(entry => entry.type === 'sale' && entry.invoiceNo)) localStorage.setItem(ledgerActivityStorageKey, JSON.stringify(ledgerActivity));
 		function formatRupees(amount) { return 'Rs ' + Number(amount || 0).toLocaleString('en-IN'); }
 		function saveLedger() { localStorage.setItem(ledgerStorageKey, JSON.stringify(customerLedger)); localStorage.setItem(ledgerReportStorageKey, JSON.stringify(ledgerReport)); localStorage.setItem(ledgerActivityStorageKey, JSON.stringify(ledgerActivity)); }
 		function getCustomer(name) { return customerLedger.find(customer => customer.name.toLowerCase() === name.toLowerCase()); }
-		function ensureCustomer(name, phone = '') {
+		function escapeReportText(value) { return String(value || '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character])); }
+		function saleReportDate(entry) { return entry.dateKey || financialDate(entry); }
+		function filteredSaleRecords() {
+			const from = saleReportFrom.value;
+			const to = saleReportTo.value;
+			const customer = saleReportCustomer.value.toLowerCase().trim();
+			const model = saleReportModel.value.toLowerCase().trim();
+			const invoice = saleReportInvoice.value.toLowerCase().trim();
+			return ledgerActivity.map((entry, index) => ({ entry, index })).filter(({ entry }) => entry.type === 'sale' && (!from || saleReportDate(entry) >= from) && (!to || saleReportDate(entry) <= to) && (!customer || (customerLedger.find(item => item.id === entry.customerId)?.name || '').toLowerCase().includes(customer)) && (!model || (entry.products || '').toLowerCase().includes(model)) && (!invoice || (entry.invoiceNo || '').toLowerCase().includes(invoice)));
+		}
+		function renderSaleReport() {
+			const records = filteredSaleRecords();
+			saleReportTotal.textContent = formatRupees(records.reduce((sum, record) => sum + Number(record.entry.amount || 0), 0));
+			saleReportCount.textContent = records.length;
+			saleReportDue.textContent = formatRupees(records.reduce((sum, record) => sum + Number(record.entry.due || 0), 0));
+			saleReportList.innerHTML = records.length ? records.slice().reverse().map(({ entry, index }) => {
+				const customer = customerLedger.find(item => item.id === entry.customerId);
+				const invoice = entry.invoiceNo || 'No invoice number';
+				return '<div class="sale-report-row"><div><strong>' + escapeReportText(customer?.name || 'Unknown customer') + '</strong><span>' + escapeReportText(invoice) + ' · ' + escapeReportText(saleReportDate(entry)) + '</span></div><div><strong>' + escapeReportText(entry.products || 'No model recorded') + '</strong><span>Received ' + formatRupees(entry.received) + ' · Due ' + formatRupees(entry.due) + '</span></div><strong>' + formatRupees(entry.amount) + '</strong><span class="invoice-status' + (Number(entry.due) > 0 ? ' credit' : '') + '">' + (Number(entry.due) > 0 ? 'Credit' : 'Paid') + '</span><div class="sale-report-actions"><button class="status-view" type="button" data-sale-print="' + index + '">Print invoice</button><button class="action-button delete" type="button" data-sale-delete="' + index + '">Delete</button><button class="action-button edit" type="button" data-sale-edit="' + index + '">Edit</button></div></div>';
+			}).join('') : '<div class="empty-state"><strong>No sales found</strong><span>Try changing the report filters or save a new invoice.</span></div>';
+		}
+		function adjustSaleLedger(entry, direction) {
+			const customer = customerLedger.find(item => item.id === entry.customerId);
+			if (customer) customer.balance = Math.max(0, Number(customer.balance || 0) + direction * Number(entry.due || 0));
+			ledgerReport.creditSales = Math.max(0, Number(ledgerReport.creditSales || 0) + direction * Number(entry.due || 0));
+			ledgerReport.cashReceived = Math.max(0, Number(ledgerReport.cashReceived || 0) + direction * Number(entry.received || 0));
+		}
+		function openSaleEdit(index) {
+			const entry = ledgerActivity[index];
+			if (!entry || entry.type !== 'sale') return;
+			const customer = customerLedger.find(item => item.id === entry.customerId);
+			editingSaleIndex = index;
+			document.getElementById('saleEditInvoice').value = entry.invoiceNo || '';
+			document.getElementById('saleEditDate').value = saleReportDate(entry);
+			document.getElementById('saleEditCustomer').value = customer?.name || '';
+			document.getElementById('saleEditAmount').value = entry.amount || 0;
+			document.getElementById('saleEditReceived').value = entry.received || 0;
+			document.getElementById('saleEditDue').value = entry.due || 0;
+			document.getElementById('saleEditProducts').value = entry.products || '';
+			saleEditForm.classList.add('open');
+			saleEditForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+		}
+		function closeSaleEdit() { editingSaleIndex = null; saleEditForm.reset(); saleEditForm.classList.remove('open'); }
+		function updateSaleEditDue() {
+			const amount = Number(document.getElementById('saleEditAmount').value || 0);
+			const received = Number(document.getElementById('saleEditReceived').value || 0);
+			document.getElementById('saleEditDue').value = Math.max(0, amount - received);
+		}
+		function printSaleInvoice(index) {
+			const entry = ledgerActivity[index];
+			if (!entry || entry.type !== 'sale') return;
+			const customer = customerLedger.find(item => item.id === entry.customerId);
+			const invoice = entry.invoiceNo || 'No invoice number';
+			const printSheet = document.getElementById('invoicePrintSheet');
+			printSheet.innerHTML = '<header><h1>World Network Mobile</h1><p>Location: Mukkam</p><p>Phone: 9539305278</p><h2>Invoice</h2></header><div class="invoice-print-meta"><div><strong>Invoice number:</strong> ' + escapeReportText(invoice) + '</div><div><strong>Date:</strong> ' + escapeReportText(saleReportDate(entry)) + '</div><div><strong>Customer:</strong> ' + escapeReportText(customer?.name || 'Unknown customer') + '</div><div><strong>Payment:</strong> ' + (Number(entry.due) > 0 ? 'Credit' : 'Paid in full') + '</div></div><table class="invoice-print-table"><thead><tr><th>Model / products</th><th>Amount</th></tr></thead><tbody><tr><td>' + escapeReportText(entry.products || 'No model recorded') + '</td><td>' + formatRupees(entry.amount) + '</td></tr></tbody></table><div class="invoice-print-total">Total: ' + formatRupees(entry.amount) + '<br>Received: ' + formatRupees(entry.received) + '<br>Credit due: ' + formatRupees(entry.due) + '</div>';
+			document.body.classList.add('printing-invoice');
+			window.print();
+			window.setTimeout(() => document.body.classList.remove('printing-invoice'), 500);
+		}
+		function ensureCustomer(name, phone = '', location = '') {
 			let customer = getCustomer(name);
-			if (!customer) { customer = { id: Date.now().toString(36) + Math.random().toString(36).slice(2), name, phone, balance: 0 }; customerLedger.push(customer); }
+			if (!customer) { customer = { id: Date.now().toString(36) + Math.random().toString(36).slice(2), name, phone, location, balance: 0 }; customerLedger.push(customer); }
 			if (phone) customer.phone = phone;
+			if (location) customer.location = location;
 			return customer;
 		}
 		function renderLedger() {
@@ -477,7 +1122,7 @@
 		document.getElementById('closeCustomer').addEventListener('click', closeCustomer);
 		document.getElementById('cancelCustomer').addEventListener('click', closeCustomer);
 		customerBackdrop.addEventListener('click', event => { if (event.target === customerBackdrop) closeCustomer(); });
-		customerForm.addEventListener('submit', event => { event.preventDefault(); ensureCustomer(customerName.value.trim(), customerPhone.value.trim()); saveLedger(); renderLedger(); closeCustomer(); notify('Customer added to credit ledger'); });
+		customerForm.addEventListener('submit', event => { event.preventDefault(); ensureCustomer(customerName.value.trim(), customerPhone.value.trim(), customerLocation.value.trim()); saveLedger(); renderLedger(); renderToolsCustomers(); closeCustomer(); notify('Customer added to credit ledger'); });
 		function updateCustomerCredit() {
 			const customer = getCustomer(billCustomer.value.trim());
 			const balance = Number(customer?.balance || 0);
@@ -509,10 +1154,9 @@
 			const input = entry.querySelector('.bill-imei');
 			const status = entry.querySelector('.bill-imei-status');
 			const value = input.value.trim();
-			if (value.length < 15) { status.textContent = '15 digits required'; status.className = 'imei-status bill-imei-status'; return; }
-			const valid = validImei(value);
-			status.textContent = valid ? 'Valid IMEI format' : 'Check this IMEI number';
-			status.className = 'imei-status bill-imei-status ' + (valid ? 'valid' : 'invalid');
+			if (!value) { status.textContent = 'Optional - scan or enter IMEI when available'; status.className = 'imei-status bill-imei-status'; return; }
+			status.textContent = 'IMEI entered';
+			status.className = 'imei-status bill-imei-status';
 		}
 		function lookupBillPhone(entry) {
 			const input = entry.querySelector('.bill-imei');
@@ -532,7 +1176,7 @@
 		billPaymentMode.addEventListener('change', updatePaymentSummary);
 		billPaidAmount.addEventListener('input', updatePaymentSummary);
 		billPhones.addEventListener('input', event => { const entry = event.target.closest('.bill-phone-entry'); if (entry && event.target.classList.contains('bill-imei')) { updateBillPhoneStatus(entry); if (event.target.value.trim().length === 15) lookupBillPhone(entry); updateBillPhonesTotal(); } });
-		billPhones.addEventListener('click', event => { const deleteButton = event.target.closest('.delete-phone'); if (deleteButton) { if (billPhones.children.length === 1) { notify('At least one phone entry is required'); return; } deleteButton.closest('.bill-phone-entry').remove(); updateBillPhoneCount(); updateBillPhonesTotal(); return; } const scan = event.target.closest('[data-scan-imei]'); if (scan) openScanner(scan.dataset.scanImei); });
+		billPhones.addEventListener('click', event => { const deleteButton = event.target.closest('.delete-phone'); if (deleteButton) { if (billPhones.children.length === 1) { notify('At least one phone entry is required'); return; } verifyDeletePin(() => { deleteButton.closest('.bill-phone-entry').remove(); updateBillPhoneCount(); updateBillPhonesTotal(); }); return; } const scan = event.target.closest('[data-scan-imei]'); if (scan) openScanner(scan.dataset.scanImei); });
 		document.querySelectorAll('[data-action="new-bill"]').forEach(button => button.addEventListener('click', openBill));
 		document.getElementById('invoiceButton').addEventListener('click', openBill);
 		document.getElementById('closeBill').addEventListener('click', closeBill);
@@ -541,7 +1185,7 @@
 		billForm.addEventListener('submit', event => {
 			event.preventDefault();
 			const entries = [...billPhones.querySelectorAll('.bill-phone-entry')];
-			if (entries.some(entry => !validImei(entry.querySelector('.bill-imei').value.trim()) || !lookupBillPhone(entry))) { entries.find(entry => !validImei(entry.querySelector('.bill-imei').value.trim()))?.querySelector('.bill-imei').focus(); return; }
+			entries.forEach(entry => { if (entry.querySelector('.bill-imei').value.trim()) lookupBillPhone(entry); });
 			const customer = billCustomer.value.trim();
 			const total = Number((billTotal.textContent || '0').replace(/[^0-9]/g, '')) || 0;
 			const due = billPaymentMode.value === 'credit' ? total : billPaymentMode.value === 'partial' ? Math.max(0, total - (Number(billPaidAmount.value) || 0)) : 0;
@@ -550,8 +1194,8 @@
 			ledgerReport.creditSales = Number(ledgerReport.creditSales || 0) + due;
 			ledgerReport.cashReceived = Number(ledgerReport.cashReceived || 0) + Math.max(0, total - due);
 			const productDetails = entries.map(entry => { const imei = entry.querySelector('.bill-imei').value.trim(); const row = [...document.querySelectorAll('#stockRows tr[data-imei]')].find(item => item.dataset.imei === imei); return row ? row.dataset.model + ' · IMEI ' + imei : 'IMEI ' + imei; }).join(', ');
-			ledgerActivity.push({ type: 'sale', customerId: account.id, date: new Date().toLocaleDateString('en-IN'), products: productDetails, amount: total, received: Math.max(0, total - due), due });
-			saveLedger(); renderLedger();
+			ledgerActivity.push({ type: 'sale', invoiceNo: 'INV-' + String(Date.now()).slice(-6), customerId: account.id, dateKey: new Date().toISOString().slice(0, 10), date: new Date().toLocaleDateString('en-IN'), products: productDetails, amount: total, received: Math.max(0, total - due), due });
+			saveLedger(); renderLedger(); renderSaleReport(); renderFinancial();
 			const paymentMessage = billPaymentMode.value === 'credit' ? ' on credit' : billPaymentMode.value === 'partial' ? ' with partial payment' : ' as paid';
 			const message = 'Bill saved for ' + customer + paymentMessage;
 			resetBillDraft();
@@ -567,11 +1211,62 @@
 			document.querySelectorAll('.category').forEach(item => item.classList.remove('active'));
 			category.classList.add('active');
 		}));
+		[saleReportFrom, saleReportTo, saleReportCustomer, saleReportModel, saleReportInvoice].forEach(input => input.addEventListener('input', renderSaleReport));
+		document.getElementById('clearSaleReportFilters').addEventListener('click', () => {
+			[saleReportFrom, saleReportTo, saleReportCustomer, saleReportModel, saleReportInvoice].forEach(input => { input.value = ''; });
+			renderSaleReport();
+		});
+		document.getElementById('printSaleReport').addEventListener('click', () => window.print());
+		document.getElementById('saleEditAmount').addEventListener('input', updateSaleEditDue);
+		document.getElementById('saleEditReceived').addEventListener('input', updateSaleEditDue);
+		document.getElementById('cancelSaleEdit').addEventListener('click', closeSaleEdit);
+		saleEditForm.addEventListener('submit', event => {
+			event.preventDefault();
+			if (editingSaleIndex === null) return;
+			const oldEntry = ledgerActivity[editingSaleIndex];
+			const customerName = document.getElementById('saleEditCustomer').value.trim();
+			const amount = Number(document.getElementById('saleEditAmount').value || 0);
+			const received = Number(document.getElementById('saleEditReceived').value || 0);
+			if (!customerName || amount <= 0 || received < 0 || received > amount) { notify('Enter valid sale details'); return; }
+			adjustSaleLedger(oldEntry, -1);
+			const account = ensureCustomer(customerName);
+			const due = Math.max(0, amount - received);
+			account.balance = Number(account.balance || 0) + due;
+			ledgerActivity[editingSaleIndex] = { ...oldEntry, invoiceNo: document.getElementById('saleEditInvoice').value.trim(), customerId: account.id, dateKey: document.getElementById('saleEditDate').value, date: new Date(document.getElementById('saleEditDate').value + 'T12:00:00').toLocaleDateString('en-IN'), products: document.getElementById('saleEditProducts').value.trim(), amount, received, due };
+			ledgerReport.creditSales = Number(ledgerReport.creditSales || 0) + due;
+			ledgerReport.cashReceived = Number(ledgerReport.cashReceived || 0) + received;
+			saveLedger();
+			renderLedger();
+			renderSaleReport();
+			renderFinancial();
+			closeSaleEdit();
+			notify('Sale updated');
+		});
+		saleReportList.addEventListener('click', event => {
+			const viewButton = event.target.closest('[data-sale-view]');
+			const printButton = event.target.closest('[data-sale-print]');
+			const editButton = event.target.closest('[data-sale-edit]');
+			const deleteButton = event.target.closest('[data-sale-delete]');
+			const actionButton = viewButton || printButton || editButton || deleteButton;
+			const index = Number(actionButton?.dataset.saleView || actionButton?.dataset.salePrint || actionButton?.dataset.saleEdit || actionButton?.dataset.saleDelete);
+			if (!Number.isInteger(index)) return;
+			const entry = ledgerActivity[index];
+			if (viewButton) { notify((entry.invoiceNo || 'Sale') + ': ' + formatRupees(entry.amount) + ' · ' + (Number(entry.due) > 0 ? 'Credit due ' + formatRupees(entry.due) : 'Paid in full')); return; }
+			if (printButton) { printSaleInvoice(index); return; }
+			if (editButton) { openSaleEdit(index); return; }
+			if (deleteButton) verifyDeletePin(() => { adjustSaleLedger(entry, -1); ledgerActivity.splice(index, 1); saveLedger(); renderLedger(); renderSaleReport(); renderFinancial(); notify((entry.invoiceNo || 'Sale') + ' deleted'); });
+		});
+		renderSaleReport();
 		function showView(view) {
 			const showDashboard = view === 'dashboard';
 			dashboardView.style.display = showDashboard ? 'grid' : 'none';
 			inventoryView.classList.toggle('active', view === 'inventory');
 			ledgerView.classList.toggle('active', view === 'ledger');
+			document.getElementById('reportsView').classList.toggle('active', view === 'reports');
+			document.getElementById('financialView').classList.toggle('active', view === 'financial');
+			document.getElementById('salesView').classList.toggle('active', view === 'sales');
+			document.getElementById('saleReportView').classList.toggle('active', view === 'sale-report');
+			document.getElementById('toolsView').classList.toggle('active', view === 'tools');
 			document.querySelectorAll('[data-view]').forEach(item => item.classList.toggle('active', item.dataset.view === view));
 			window.scrollTo({ top: 0, behavior: 'smooth' });
 		}
@@ -588,8 +1283,403 @@
 				const matchesFilter = stockFilter === 'all' || row.dataset.stock === stockFilter || row.dataset.condition === stockFilter;
 				row.style.display = matchesTerm && matchesFilter ? '' : 'none';
 			});
+			document.querySelectorAll('#stockRows .stock-group-row').forEach(group => {
+				const model = group.dataset.groupModel;
+				group.style.display = [...document.querySelectorAll('#stockRows tr[data-product]')].some(row => row.dataset.model === model && row.style.display !== 'none') ? '' : 'none';
+			});
 		}
 		inventorySearch.addEventListener('input', refreshInventory);
+		const invoiceSearch = document.getElementById('invoiceSearch');
+		invoiceSearch.addEventListener('input', event => {
+			const term = event.target.value.toLowerCase().trim();
+			document.querySelectorAll('#invoiceList .invoice-row').forEach(row => { row.style.display = row.dataset.search.includes(term) ? '' : 'none'; });
+		});
+		document.getElementById('newInvoiceFromSales').addEventListener('click', openBill);
+		const modelList = document.getElementById('modelList');
+		const modelCount = document.getElementById('modelCount');
+		const modelSearch = document.getElementById('modelSearch');
+		const modelStorageKey = 'stockly-models-v1';
+		const defaultModels = ['iPhone 11', 'iPhone 12', 'iPhone 13', 'iPhone 14', 'iPhone 15', 'iPhone 16 Pro'];
+		let editingModelIndex = null;
+		function renderModels() {
+			const models = JSON.parse(localStorage.getItem(modelStorageKey) || JSON.stringify(defaultModels));
+			const term = modelSearch.value.toLowerCase().trim();
+			const filteredModels = models.filter(model => model.toLowerCase().includes(term));
+			modelList.innerHTML = '';
+			filteredModels.forEach(model => {
+				const row = document.createElement('div');
+				row.className = 'model-row';
+				const info = document.createElement('div');
+				info.innerHTML = '<strong>' + model + '</strong><span>Available for inventory and purchase entries</span>';
+				const actions = document.createElement('div');
+				actions.className = 'tools-actions';
+				const statusButton = document.createElement('button');
+				statusButton.className = 'status-view';
+				statusButton.type = 'button';
+				statusButton.textContent = 'View status';
+				statusButton.addEventListener('click', () => notify(model + ' status: Active'));
+				const deleteButton = document.createElement('button');
+				deleteButton.className = 'action-button delete';
+				deleteButton.type = 'button';
+				deleteButton.textContent = 'Delete';
+				deleteButton.addEventListener('click', () => {
+					const index = models.indexOf(model);
+					if (index < 0) return;
+					verifyDeletePin(() => {
+						models.splice(index, 1);
+						localStorage.setItem(modelStorageKey, JSON.stringify(models));
+						renderModels();
+						notify(model + ' deleted from model list');
+					});
+				});
+				const editButton = document.createElement('button');
+				editButton.className = 'action-button edit';
+				editButton.type = 'button';
+				editButton.textContent = 'Edit';
+				editButton.addEventListener('click', () => {
+					editingModelIndex = models.indexOf(model);
+					document.getElementById('newModelName').value = model;
+					document.getElementById('newModelName').focus();
+					notify('Edit model details and save');
+				});
+				actions.append(statusButton, deleteButton, editButton);
+				row.append(info, actions);
+				modelList.appendChild(row);
+			});
+			if (!filteredModels.length) modelList.innerHTML = '<div class="empty-state"><strong>No models found</strong><span>Try a different search.</span></div>';
+			modelCount.textContent = models.length + (models.length === 1 ? ' model' : ' models');
+			document.querySelectorAll('.uae-purchase-model').forEach(select => {
+				const selectedModel = select.value;
+				select.innerHTML = '<option value="">Select model</option>' + models.map(model => '<option>' + model + '</option>').join('');
+				if (models.includes(selectedModel)) select.value = selectedModel;
+			});
+			localStorage.setItem(modelStorageKey, JSON.stringify(models));
+		}
+		modelSearch.addEventListener('input', renderModels);
+		document.getElementById('addModelForm').addEventListener('submit', event => {
+			event.preventDefault();
+			const name = document.getElementById('newModelName').value.trim();
+			if (!name) return;
+			const models = JSON.parse(localStorage.getItem(modelStorageKey) || JSON.stringify(defaultModels));
+			if (editingModelIndex !== null) {
+				models[editingModelIndex] = name;
+				localStorage.setItem(modelStorageKey, JSON.stringify(models));
+				editingModelIndex = null;
+				event.target.reset();
+				renderModels();
+				notify(name + ' updated');
+				return;
+			}
+			if (models.some(model => model.toLowerCase() === name.toLowerCase())) { notify('This model is already listed'); return; }
+			models.push(name);
+			localStorage.setItem(modelStorageKey, JSON.stringify(models));
+			event.target.reset();
+			renderModels();
+			notify(name + ' added to model list');
+		});
+		renderModels();
+		const toolsCustomerList = document.getElementById('toolsCustomerList');
+		const toolsCustomerCount = document.getElementById('toolsCustomerCount');
+		const toolsCustomerSearch = document.getElementById('toolsCustomerSearch');
+		let editingCustomerId = null;
+		function renderToolsCustomers() {
+			const term = toolsCustomerSearch.value.toLowerCase().trim();
+			const customers = customerLedger.filter(customer => customer.name.toLowerCase().includes(term) || (customer.phone || '').toLowerCase().includes(term) || (customer.location || '').toLowerCase().includes(term));
+			toolsCustomerCount.textContent = customerLedger.length + (customerLedger.length === 1 ? ' customer' : ' customers');
+			toolsCustomerList.innerHTML = '';
+			customers.forEach(customer => {
+				const row = document.createElement('div');
+				row.className = 'customer-tools-row';
+				const info = document.createElement('div');
+				info.innerHTML = '<strong>' + customer.name + '</strong><span>' + (customer.phone || 'No phone saved') + ' · ' + (customer.location || 'No location saved') + '</span>';
+				const balance = document.createElement('span');
+				balance.className = 'invoice-status' + (Number(customer.balance) > 0 ? ' credit' : '');
+				balance.textContent = formatRupees(customer.balance) + ' due';
+				const actions = document.createElement('div');
+				actions.className = 'tools-actions';
+				const statusButton = document.createElement('button');
+				statusButton.className = 'status-view';
+				statusButton.type = 'button';
+				statusButton.textContent = 'View status';
+				statusButton.addEventListener('click', () => openCustomerReport(customer.id));
+				const deleteButton = document.createElement('button');
+				deleteButton.className = 'action-button delete';
+				deleteButton.type = 'button';
+				deleteButton.textContent = 'Delete';
+				deleteButton.addEventListener('click', () => verifyDeletePin(() => {
+					customerLedger = customerLedger.filter(item => item.id !== customer.id);
+					saveLedger();
+					renderLedger();
+					renderToolsCustomers();
+					notify(customer.name + ' deleted');
+				}));
+				const editButton = document.createElement('button');
+				editButton.className = 'action-button edit';
+				editButton.type = 'button';
+				editButton.textContent = 'Edit';
+				editButton.addEventListener('click', () => {
+					editingCustomerId = customer.id;
+					document.getElementById('toolsCustomerName').value = customer.name;
+					document.getElementById('toolsCustomerPhone').value = customer.phone || '';
+					document.getElementById('toolsCustomerLocation').value = customer.location || '';
+					document.getElementById('toolsCustomerName').focus();
+					notify('Edit customer details and save');
+				});
+				actions.append(statusButton, deleteButton, editButton);
+				row.append(info, balance, actions);
+				toolsCustomerList.appendChild(row);
+			});
+			if (!customers.length) toolsCustomerList.innerHTML = '<div class="empty-state"><strong>No customers found</strong><span>Add a customer to start your customer list.</span></div>';
+		}
+		toolsCustomerSearch.addEventListener('input', renderToolsCustomers);
+		document.getElementById('toolsCustomerForm').addEventListener('submit', event => {
+			event.preventDefault();
+			const name = document.getElementById('toolsCustomerName').value.trim();
+			const phone = document.getElementById('toolsCustomerPhone').value.trim();
+			const location = document.getElementById('toolsCustomerLocation').value.trim();
+			const customer = editingCustomerId ? customerLedger.find(item => item.id === editingCustomerId) : null;
+			if (customer) {
+				customer.name = name;
+				customer.phone = phone;
+				customer.location = location;
+				editingCustomerId = null;
+			}
+			const savedCustomer = customer || ensureCustomer(name, phone, location);
+			saveLedger();
+			event.target.reset();
+			renderLedger();
+			renderToolsCustomers();
+			notify(savedCustomer.name + (customer ? ' updated' : ' added to customer list'));
+		});
+		renderToolsCustomers();
+		function updateUaePurchaseTotal() {
+			const total = [...uaePurchaseItems.querySelectorAll('.uae-purchase-price')].reduce((sum, input) => sum + (Number(input.value) || 0), 0);
+			const count = uaePurchaseItems.querySelectorAll('.uae-purchase-entry').length;
+			uaePurchaseCount.textContent = count + (count === 1 ? ' mobile' : ' mobiles');
+			uaePurchaseFormTotal.textContent = 'AED ' + total.toLocaleString('en-AE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+		}
+		function renderUaeTransfers() {
+			const purchases = JSON.parse(localStorage.getItem(uaePurchaseStorageKey) || '[]');
+			const visiblePurchases = filterReportPurchases(purchases);
+			const pending = visiblePurchases.filter(purchase => purchase.status !== 'Transferred').length;
+			uaeTransferCount.textContent = pending;
+			uaePurchaseTotal.textContent = 'AED ' + visiblePurchases.reduce((sum, purchase) => sum + Number(purchase.price || 0), 0).toLocaleString('en-AE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+			uaeTransferList.innerHTML = '';
+			uaePurchaseList.innerHTML = '<span class="purchase-list-title">All UAE purchases</span>';
+			visiblePurchases.forEach(purchase => {
+				const row = document.createElement('div');
+				row.className = 'transfer-row';
+				const info = document.createElement('div');
+				const title = document.createElement('strong');
+				title.textContent = purchase.model;
+				const details = document.createElement('span');
+				details.textContent = [purchase.condition, purchase.colour, purchase.storage, purchase.battery ? 'Battery ' + purchase.battery : '', purchase.imei ? 'IMEI ' + purchase.imei : '', purchase.date].filter(Boolean).join(' · ');
+				info.append(title, details);
+				const price = document.createElement('span');
+				price.className = 'invoice-status';
+				price.textContent = 'AED ' + Number(purchase.price).toLocaleString('en-AE', { minimumFractionDigits: 2 });
+				const actions = document.createElement('div');
+				actions.className = 'entry-actions purchase-actions';
+				const deleteButton = document.createElement('button');
+				deleteButton.type = 'button';
+				deleteButton.className = 'action-button delete';
+				deleteButton.setAttribute('aria-label', 'Delete purchase');
+				deleteButton.textContent = 'Delete';
+				deleteButton.addEventListener('click', () => {
+					const purchaseIndex = purchases.indexOf(purchase);
+					if (purchaseIndex < 0) return;
+					verifyDeletePin(() => {
+						purchases.splice(purchaseIndex, 1);
+						localStorage.setItem(uaePurchaseStorageKey, JSON.stringify(purchases));
+						renderUaeTransfers();
+						notify('UAE purchase deleted');
+					});
+				});
+				const editButton = document.createElement('button');
+				editButton.type = 'button';
+				editButton.className = 'action-button edit';
+				editButton.setAttribute('aria-label', 'Edit purchase');
+				editButton.textContent = 'Edit';
+				editButton.addEventListener('click', () => {
+					const purchaseIndex = purchases.indexOf(purchase);
+					if (purchaseIndex < 0) return;
+					editingUaePurchaseIndex = purchaseIndex;
+					const entry = uaePurchaseItems.firstElementChild;
+					uaePurchaseDate.value = purchase.date || '';
+					entry.querySelector('.uae-purchase-model').value = purchase.model || '';
+					entry.querySelector('.uae-purchase-condition').value = purchase.condition || 'Fresh phone';
+					entry.querySelector('.uae-purchase-battery').value = purchase.battery || '';
+					entry.querySelector('.uae-purchase-colour').value = purchase.colour || 'Black';
+					entry.querySelector('.uae-purchase-storage').value = purchase.storage || '128 GB';
+					entry.querySelector('.uae-purchase-imei').value = purchase.imei || '';
+					entry.querySelector('.uae-purchase-price').value = purchase.price || '';
+					const batteryField = entry.querySelector('.uae-purchase-battery-field');
+					const battery = entry.querySelector('.uae-purchase-battery');
+					const used = entry.querySelector('.uae-purchase-condition').value === 'Used phone';
+					batteryField.classList.toggle('visible', used);
+					battery.required = used;
+					uaePurchaseItems.querySelectorAll('.uae-purchase-entry').forEach((item, index) => { if (index > 0) item.remove(); });
+					uaePurchaseBackdrop.classList.add('open');
+					updateUaePurchaseTotal();
+				});
+				actions.append(deleteButton, editButton);
+				row.append(info, price, actions);
+				uaePurchaseList.appendChild(row);
+			});
+			if (!visiblePurchases.length) {
+				uaeTransferList.innerHTML = '<div class="empty-state"><strong>No UAE purchase stock yet</strong><span>Saved UAE purchases will appear here.</span></div>';
+				uaePurchaseList.innerHTML += '<div class="empty-state"><strong>No UAE purchases yet</strong><span>Add a purchase to see it here.</span></div>';
+				return;
+			}
+			document.getElementById('viewUaePurchases').addEventListener('click', () => {
+				uaePurchaseList.classList.toggle('open');
+				document.getElementById('viewUaePurchases').textContent = uaePurchaseList.classList.contains('open') ? 'Hide purchases' : 'View all purchases';
+			});
+			visiblePurchases.forEach(purchase => {
+				const row = document.createElement('div');
+				row.className = 'transfer-row';
+				const info = document.createElement('div');
+				const title = document.createElement('strong');
+				title.textContent = purchase.model;
+				const details = document.createElement('span');
+				details.textContent = [purchase.condition, purchase.colour, purchase.storage, purchase.battery ? 'Battery ' + purchase.battery : '', purchase.imei ? 'IMEI ' + purchase.imei : '', purchase.date, 'AED ' + Number(purchase.price).toLocaleString('en-AE', { minimumFractionDigits: 2 })].filter(Boolean).join(' · ');
+				info.append(title, details);
+				const actions = document.createElement('div');
+				actions.className = 'entry-actions transfer-actions';
+				const transferButton = document.createElement('button');
+				transferButton.type = 'button';
+				transferButton.className = purchase.status === 'Transferred' ? 'invoice-status' : 'invoice-action';
+				transferButton.textContent = purchase.status === 'Transferred' ? 'Transferred' : 'Transfer';
+				transferButton.addEventListener('click', () => { if (purchase.status !== 'Transferred') openMobileForTransfer(purchase); });
+				const deleteButton = document.createElement('button');
+				deleteButton.type = 'button';
+				deleteButton.className = 'action-button delete';
+				deleteButton.textContent = 'Delete';
+				deleteButton.addEventListener('click', () => {
+					const purchaseIndex = purchases.indexOf(purchase);
+					if (purchaseIndex < 0) return;
+					verifyDeletePin(() => {
+						purchases.splice(purchaseIndex, 1);
+						localStorage.setItem(uaePurchaseStorageKey, JSON.stringify(purchases));
+						renderUaeTransfers();
+						notify('UAE stock transfer deleted');
+					});
+				});
+				const editButton = document.createElement('button');
+				editButton.type = 'button';
+				editButton.className = 'action-button edit';
+				editButton.textContent = 'Edit';
+				editButton.addEventListener('click', () => {
+					const purchaseIndex = purchases.indexOf(purchase);
+					if (purchaseIndex < 0) return;
+					editingUaePurchaseIndex = purchaseIndex;
+					const entry = uaePurchaseItems.firstElementChild;
+					uaePurchaseDate.value = purchase.date || '';
+					entry.querySelector('.uae-purchase-model').value = purchase.model || '';
+					entry.querySelector('.uae-purchase-condition').value = purchase.condition || 'Fresh phone';
+					entry.querySelector('.uae-purchase-battery').value = purchase.battery || '';
+					entry.querySelector('.uae-purchase-colour').value = purchase.colour || 'Black';
+					entry.querySelector('.uae-purchase-storage').value = purchase.storage || '128 GB';
+					entry.querySelector('.uae-purchase-imei').value = purchase.imei || '';
+					entry.querySelector('.uae-purchase-price').value = purchase.price || '';
+					const batteryField = entry.querySelector('.uae-purchase-battery-field');
+					const battery = entry.querySelector('.uae-purchase-battery');
+					const used = entry.querySelector('.uae-purchase-condition').value === 'Used phone';
+					batteryField.classList.toggle('visible', used);
+					battery.required = used;
+					uaePurchaseItems.querySelectorAll('.uae-purchase-entry').forEach((item, index) => { if (index > 0) item.remove(); });
+					uaePurchaseBackdrop.classList.add('open');
+					updateUaePurchaseTotal();
+				});
+				actions.append(transferButton, deleteButton, editButton);
+				row.append(info, actions);
+				uaeTransferList.appendChild(row);
+			});
+		}
+		[reportFromDate, reportToDate, reportModelFilter, reportImeiFilter, reportColourFilter].forEach(filter => filter.addEventListener('input', renderUaeTransfers));
+		document.getElementById('clearReportFilters').addEventListener('click', () => {
+			[reportFromDate, reportToDate, reportModelFilter, reportImeiFilter, reportColourFilter].forEach(filter => { filter.value = ''; });
+			renderUaeTransfers();
+		});
+		document.getElementById('addUaePurchase').addEventListener('click', () => { uaePurchaseBackdrop.classList.add('open'); if (!uaePurchaseDate.value) uaePurchaseDate.value = new Date().toISOString().slice(0, 10); uaePurchaseItems.querySelector('.uae-purchase-model').focus(); updateUaePurchaseTotal(); });
+		document.getElementById('closeUaePurchase').addEventListener('click', () => uaePurchaseBackdrop.classList.remove('open'));
+		document.getElementById('cancelUaePurchase').addEventListener('click', () => uaePurchaseBackdrop.classList.remove('open'));
+		uaePurchaseBackdrop.addEventListener('click', event => { if (event.target === uaePurchaseBackdrop) uaePurchaseBackdrop.classList.remove('open'); });
+		uaePurchaseItems.addEventListener('input', updateUaePurchaseTotal);
+		uaePurchaseItems.addEventListener('change', event => {
+			if (!event.target.classList.contains('uae-purchase-condition')) return;
+			const entry = event.target.closest('.uae-purchase-entry');
+			const batteryField = entry.querySelector('.uae-purchase-battery-field');
+			const battery = entry.querySelector('.uae-purchase-battery');
+			const used = event.target.value === 'Used phone';
+			batteryField.classList.toggle('visible', used);
+			battery.required = used;
+			if (!used) battery.value = '';
+		});
+		uaePurchaseItems.addEventListener('click', event => {
+			const deleteButton = event.target.closest('.delete-phone');
+			if (!deleteButton) return;
+			if (uaePurchaseItems.children.length === 1) { notify('At least one mobile is required'); return; }
+			verifyDeletePin(() => {
+				deleteButton.closest('.uae-purchase-entry').remove();
+				uaePurchaseItems.querySelectorAll('.bill-entry-label').forEach((label, index) => { label.textContent = 'Mobile ' + (index + 1); });
+				updateUaePurchaseTotal();
+			});
+		});
+		document.getElementById('addUaePurchaseItem').addEventListener('click', () => {
+			const entry = uaePurchaseItems.firstElementChild.cloneNode(true);
+			entry.querySelectorAll('input').forEach(input => { input.value = ''; });
+			const condition = entry.querySelector('.uae-purchase-condition');
+			const batteryField = entry.querySelector('.uae-purchase-battery-field');
+			const battery = entry.querySelector('.uae-purchase-battery');
+			condition.selectedIndex = 0;
+			battery.selectedIndex = 0;
+			batteryField.classList.remove('visible');
+			battery.required = false;
+			entry.querySelector('.uae-purchase-scan').addEventListener('click', () => openScanner(entry.querySelector('.uae-purchase-imei')));
+			uaePurchaseItems.appendChild(entry);
+			uaePurchaseItems.querySelectorAll('.bill-entry-label').forEach((label, index) => { label.textContent = 'Mobile ' + (index + 1); });
+			updateUaePurchaseTotal();
+			entry.querySelector('.uae-purchase-model').focus();
+		});
+		uaePurchaseItems.querySelector('.uae-purchase-scan').addEventListener('click', () => openScanner(uaePurchaseItems.querySelector('.uae-purchase-imei')));
+		uaePurchaseForm.addEventListener('submit', event => {
+			event.preventDefault();
+			const total = [...uaePurchaseItems.querySelectorAll('.uae-purchase-price')].reduce((sum, input) => sum + (Number(input.value) || 0), 0);
+			const purchases = JSON.parse(localStorage.getItem(uaePurchaseStorageKey) || '[]');
+			const editedPurchase = {
+				model: uaePurchaseItems.querySelector('.uae-purchase-model').value,
+				condition: uaePurchaseItems.querySelector('.uae-purchase-condition').value,
+				battery: uaePurchaseItems.querySelector('.uae-purchase-battery').value,
+				colour: uaePurchaseItems.querySelector('.uae-purchase-colour').value,
+				storage: uaePurchaseItems.querySelector('.uae-purchase-storage').value,
+				imei: uaePurchaseItems.querySelector('.uae-purchase-imei').value.trim(),
+				price: uaePurchaseItems.querySelector('.uae-purchase-price').value,
+				date: uaePurchaseDate.value,
+				status: editingUaePurchaseIndex === null ? 'Pending' : (purchases[editingUaePurchaseIndex]?.status || 'Pending')
+			};
+			if (editingUaePurchaseIndex === null) {
+				uaePurchaseItems.querySelectorAll('.uae-purchase-entry').forEach(entry => purchases.push({
+					...editedPurchase,
+					model: entry.querySelector('.uae-purchase-model').value,
+					condition: entry.querySelector('.uae-purchase-condition').value,
+					battery: entry.querySelector('.uae-purchase-battery').value,
+					colour: entry.querySelector('.uae-purchase-colour').value,
+					storage: entry.querySelector('.uae-purchase-storage').value,
+					imei: entry.querySelector('.uae-purchase-imei').value.trim(),
+					price: entry.querySelector('.uae-purchase-price').value
+				}));
+			} else {
+				purchases[editingUaePurchaseIndex] = editedPurchase;
+			}
+			localStorage.setItem(uaePurchaseStorageKey, JSON.stringify(purchases));
+			uaePurchaseTotal.textContent = 'AED ' + total.toLocaleString('en-AE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+			renderUaeTransfers();
+			uaePurchaseBackdrop.classList.remove('open');
+			editingUaePurchaseIndex = null;
+			notify('UAE purchase saved in AED');
+		});
+		renderUaeTransfers();
 		document.querySelectorAll('[data-stock-filter]').forEach(button => button.addEventListener('click', () => {
 			document.querySelectorAll('[data-stock-filter]').forEach(item => item.classList.remove('active'));
 			button.classList.add('active');
@@ -597,24 +1687,38 @@
 			refreshInventory();
 		}));
 		document.querySelectorAll('.restock-btn').forEach(button => button.addEventListener('click', () => notify('Restock request added for ' + button.closest('tr').dataset.product)));
-		function validImei(value) {
-			if (!/^\d{15}$/.test(value)) return false;
-			let sum = 0;
-			for (let index = 0; index < value.length; index += 1) {
-				let digit = Number(value[value.length - 1 - index]);
-				if (index % 2 === 1) digit = digit * 2 > 9 ? digit * 2 - 9 : digit * 2;
-				sum += digit;
-			}
-			return sum % 10 === 0;
-		}
 		function updateImeiStatus() {
 			const value = mobileImei.value.trim();
-			if (value.length < 15) { imeiStatus.textContent = '15 digits required'; imeiStatus.className = 'imei-status'; return; }
-			const valid = validImei(value);
-			imeiStatus.textContent = valid ? 'Valid IMEI format' : 'Check this IMEI number';
-			imeiStatus.className = 'imei-status ' + (valid ? 'valid' : 'invalid');
+			if (!value) { imeiStatus.textContent = 'Optional - scan or enter IMEI when available'; imeiStatus.className = 'imei-status'; return; }
+			imeiStatus.textContent = 'IMEI entered';
+			imeiStatus.className = 'imei-status';
 		}
-		function openMobile() { mobileBackdrop.classList.add('open'); mobileImei.focus(); }
+		function openMobile() { pendingUaeTransfer = null; editingInventoryRow = null; mobileBackdrop.classList.add('open'); mobileImei.focus(); }
+		function openMobileForTransfer(purchase) {
+			pendingUaeTransfer = purchase;
+			showView('inventory');
+			const modelOption = [...mobileModel.options].find(option => option.value === purchase.model || option.textContent === purchase.model);
+			if (!modelOption) mobileModel.add(new Option(purchase.model, purchase.model));
+			mobileModel.value = purchase.model;
+			mobileCondition.value = purchase.condition === 'Used phone' ? 'used' : 'fresh';
+			mobileColor.value = purchase.colour;
+			mobileStorage.value = purchase.storage;
+			mobileImei.value = purchase.imei;
+			mobilePrice.value = '';
+			document.getElementById('mobilePrice').required = true;
+			document.getElementById('mobilePrice').placeholder = 'Enter INR sale price';
+			if (pendingUaeTransfer.condition === 'Used phone') {
+				batteryField.classList.add('visible');
+				batteryHealth.required = true;
+				batteryHealth.value = pendingUaeTransfer.battery;
+			} else {
+				batteryField.classList.remove('visible');
+				batteryHealth.required = false;
+				batteryHealth.value = '';
+			}
+			mobileBackdrop.classList.add('open');
+			mobilePrice.focus();
+		}
 		function closeMobile() { mobileBackdrop.classList.remove('open'); mobileForm.reset(); batteryField.classList.remove('visible'); batteryHealth.required = false; updateImeiStatus(); }
 		const stockStorageKey = 'stockly-stock-v1';
 		const previousStock = [
@@ -625,6 +1729,23 @@
 		function persistStock() {
 			const records = [...document.querySelectorAll('#stockRows tr[data-product]')].map(row => ({ model: row.dataset.model, condition: row.dataset.condition === 'used' ? 'Used' : 'Fresh', battery: row.dataset.battery === 'Fresh phone' ? '' : row.dataset.battery, imei: row.dataset.imei, price: row.dataset.price, color: row.dataset.color, storage: row.dataset.storage }));
 			localStorage.setItem(stockStorageKey, JSON.stringify(records));
+		}
+		function renderInventoryGroups() {
+			const stockRows = document.getElementById('stockRows');
+			stockRows.querySelectorAll('.stock-group-row').forEach(group => group.remove());
+			const groups = new Map();
+			[...stockRows.querySelectorAll('tr[data-product]')].forEach(row => {
+				const model = row.dataset.model;
+				if (!groups.has(model)) groups.set(model, []);
+				groups.get(model).push(row);
+			});
+			groups.forEach((rows, model) => {
+				const groupRow = document.createElement('tr');
+				groupRow.className = 'stock-group-row';
+				groupRow.dataset.groupModel = model;
+				groupRow.innerHTML = '<td colspan="6"><strong>' + model + '</strong><span>' + rows.length + (rows.length === 1 ? ' product' : ' products') + '</span></td>';
+				rows[0].before(groupRow);
+			});
 		}
 		function addMobileToInventory(model, condition, battery, imei, price, color, storage, shouldPersist = true) {
 			const emptyRow = document.querySelector('#stockRows tr:not([data-product])');
@@ -639,9 +1760,41 @@
 			row.dataset.storage = storage;
 			row.dataset.battery = battery || 'Fresh phone';
 			row.dataset.price = price;
-			row.innerHTML = '<td><div class="stock-product"><div class="stock-thumb">&#128241;</div><div><strong>' + model + '</strong><span>' + condition + ' &middot; ' + storage + ' &middot; ' + color + '<br>IMEI ' + imei + (battery ? ' &middot; Battery ' + battery : '') + '</span></div></div></td><td class="stock-number">1 unit</td><td>1 unit</td><td class="stock-value">Rs ' + Number(price).toLocaleString('en-IN') + '</td><td><span class="stock-status">Healthy</span></td><td><button class="restock-btn">Restock</button></td>';
+			row.innerHTML = '<td><div class="stock-product"><div class="stock-thumb">&#128241;</div><div><strong>' + model + '</strong><span>' + condition + ' &middot; ' + storage + ' &middot; ' + color + '<br>IMEI ' + imei + (battery ? ' &middot; Battery ' + battery : '') + '</span></div></div></td><td class="stock-number">1 unit</td><td>1 unit</td><td class="stock-value">Rs ' + Number(price).toLocaleString('en-IN') + '</td><td><span class="stock-status">Healthy</span></td><td><div class="stock-actions"><button class="restock-btn" type="button">Restock</button><button class="status-view" type="button">View status</button><button class="action-button delete" type="button">Delete</button><button class="action-button edit" type="button">Edit</button></div></td>';
 			document.getElementById('stockRows').appendChild(row);
 			row.querySelector('.restock-btn').addEventListener('click', () => notify('Restock request added for ' + model));
+			row.querySelector('.status-view').addEventListener('click', () => notify(model + ' status: ' + row.querySelector('.stock-status').textContent));
+			row.querySelector('.delete').addEventListener('click', () => {
+				verifyDeletePin(() => {
+					row.remove();
+					renderInventoryGroups();
+					persistStock();
+					updateStockCounts();
+					notify(model + ' deleted from inventory');
+				});
+			});
+			row.querySelector('.edit').addEventListener('click', () => {
+				pendingUaeTransfer = null;
+				editingInventoryRow = row;
+				mobileModel.value = model;
+				mobileCondition.value = condition.toLowerCase() === 'used' ? 'used' : 'fresh';
+				mobileColor.value = color;
+				mobileStorage.value = storage;
+				mobileImei.value = imei;
+				mobilePrice.value = price;
+				if (condition.toLowerCase() === 'used') {
+					batteryField.classList.add('visible');
+					batteryHealth.required = true;
+					batteryHealth.value = battery;
+				} else {
+					batteryField.classList.remove('visible');
+					batteryHealth.required = false;
+					batteryHealth.value = '';
+				}
+				mobileBackdrop.classList.add('open');
+				mobilePrice.focus();
+			});
+			renderInventoryGroups();
 			updateStockCounts();
 			if (shouldPersist) persistStock();
 		}
@@ -667,7 +1820,6 @@
 		mobileBackdrop.addEventListener('click', event => { if (event.target === mobileBackdrop) closeMobile(); });
 		mobileForm.addEventListener('submit', event => {
 			event.preventDefault();
-			if (!validImei(mobileImei.value.trim())) { updateImeiStatus(); mobileImei.focus(); return; }
 			const model = document.getElementById('mobileModel').value.trim();
 			const condition = document.getElementById('mobileCondition').value === 'fresh' ? 'Fresh' : 'Used';
 			const battery = condition === 'Used' ? ' - Battery ' + batteryHealth.value : '';
@@ -675,7 +1827,19 @@
 			const color = document.getElementById('mobileColor').value;
 			const storage = document.getElementById('mobileStorage').value;
 			const price = document.getElementById('mobilePrice').value;
+			if (editingInventoryRow) {
+				editingInventoryRow.remove();
+				editingInventoryRow = null;
+			}
 			addMobileToInventory(model, condition, batteryValue, mobileImei.value.trim(), price, color, storage);
+			if (pendingUaeTransfer) {
+				const purchases = JSON.parse(localStorage.getItem(uaePurchaseStorageKey) || '[]');
+				const transfer = purchases.find(purchase => purchase.model === pendingUaeTransfer.model && purchase.date === pendingUaeTransfer.date && purchase.price === pendingUaeTransfer.price && purchase.imei === pendingUaeTransfer.imei);
+				if (transfer) transfer.status = 'Transferred';
+				localStorage.setItem(uaePurchaseStorageKey, JSON.stringify(purchases));
+				pendingUaeTransfer = null;
+				renderUaeTransfers();
+			}
 			closeMobile();
 			notify(model + ' (' + condition + battery + ') saved with IMEI');
 		});
@@ -696,8 +1860,8 @@
 				const detector = new BarcodeDetector({ formats: ['code_128', 'code_39', 'ean_13', 'qr_code'] });
 				scanTimer = setInterval(async () => {
 					const codes = await detector.detect(scanVideo);
-					const value = codes.map(code => code.rawValue).find(rawValue => /^\d{15}$/.test(rawValue));
-					if (value) { document.getElementById(targetId).value = value; document.getElementById(targetId).dispatchEvent(new Event('input', { bubbles: true })); await closeScanner(); notify('IMEI scanned successfully'); }
+					const value = codes.map(code => code.rawValue).find(rawValue => rawValue);
+					if (value) { const target = typeof targetId === 'string' ? document.getElementById(targetId) : targetId; target.value = value; target.dispatchEvent(new Event('input', { bubbles: true })); await closeScanner(); notify('IMEI scanned successfully'); }
 				}, 300);
 			} catch (error) { await closeScanner(); notify('Camera permission needed for IMEI scanning'); }
 		}
